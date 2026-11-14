@@ -1,0 +1,636 @@
+<title>MY TOWN TAXI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--pri:#17191B;--pri2:#3A4044;--prisoft:#FFF1BF;--acc:#FFC21A;--bg:#F3F5F4;--card:#fff;--ink:#14201C;--mut:#64746E;--line:#E2E8E5;--red:#C8372D;--redsoft:#FBE9E7;--ok:#1F8A4C;--oksoft:#E4F4EA;--warn:#A86A12;--warnsoft:#FDF1DC;--blue:#2D5BD8;--bluesoft:#E6EDFC}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#D9E0DD}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);font-size:15px;-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit;color:inherit}
+#phone{max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;padding-bottom:84px}
+@media(min-width:520px){#phone{margin:24px auto;min-height:calc(100vh - 48px);border-radius:30px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.18)}}
+.bar{position:sticky;top:0;z-index:20;background:var(--pri);color:#fff;display:flex;align-items:center;gap:8px;padding:14px 14px;min-height:58px}
+.bar h1{font-size:18px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .ib{background:rgba(255,255,255,.12);border:0;width:36px;height:36px;border-radius:12px;display:grid;place-items:center;cursor:pointer;color:#fff}
+.pill{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--acc);color:#3a2600;padding:5px 9px;border-radius:99px}
+.content{padding:14px}
+.foot{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;border-top:1px solid var(--line);padding:12px 14px calc(12px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px;z-index:25}
+.foot .grow{flex:1;min-width:0}
+#nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;border-top:1px solid var(--line);display:flex;z-index:25;padding-bottom:env(safe-area-inset-bottom)}
+#nav button{flex:1;background:none;border:0;padding:9px 2px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--mut);cursor:pointer;position:relative}
+#nav button.on{color:var(--pri)}
+#nav button.on svg{background:var(--prisoft);border-radius:99px}
+#nav svg{width:44px;height:26px;padding:3px 10px}
+.cnt{position:absolute;top:4px;right:calc(50% - 26px);background:var(--red);color:#fff;font-size:10px;min-width:17px;height:17px;border-radius:99px;display:grid;place-items:center;padding:0 4px}
+.card{background:var(--card);border-radius:18px;padding:14px;border:1px solid var(--line);margin-bottom:12px}
+.card.flat{border:0}
+h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.sec{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:18px 2px 8px}
+.mut{color:var(--mut)}.sm{font-size:13px}.xs{font-size:11.5px}.b{font-weight:700}
+.row{display:flex;align-items:center;gap:8px}.sb{justify-content:space-between}.wrap{flex-wrap:wrap}
+.mt{margin-top:8px}.mt2{margin-top:14px}.mb{margin-bottom:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid2>*,.grid3>*{min-width:0}
+.mstrip{display:flex;gap:10px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none;scroll-snap-type:x proximity}
+.mstrip::-webkit-scrollbar{display:none}
+.mtile{flex:none;width:136px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:8px 8px 10px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:2px;scroll-snap-align:start}
+.mtile.on{border-color:var(--pri);box-shadow:0 0 0 2px var(--acc)}
+.mtile .mimg{background:linear-gradient(140deg,#F4F6F5,#E3E9E6);border-radius:11px;aspect-ratio:2/1.15;display:grid;place-items:center;margin-bottom:5px;overflow:hidden}
+.mtile .mimg .carsvg{width:96%}
+.mtile b{font-size:13px}.mtile span{font-size:11.5px;color:var(--mut)}
+.grid2 .mtile{width:auto}
+input[type=datetime-local].inp{font-size:13px;padding:11px 8px;min-width:0;width:100%}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;background:var(--pri);color:#fff;font-weight:700;padding:14px 16px;border-radius:14px;cursor:pointer;font-size:15px;margin-top:10px}
+.btn:active{transform:scale(.98)}
+.btn.acc{background:var(--acc);color:#2b1c00}
+.btn.ghost{background:transparent;color:var(--pri);border:1.5px solid var(--line)}
+.btn.red{background:var(--red)}
+.btn.sm{padding:9px 12px;font-size:13px;border-radius:11px;margin-top:0;width:auto}
+.btn[disabled]{background:#B9C4C0;cursor:not-allowed}
+.foot .btn{margin:0;width:auto;padding:14px 22px}
+.link{background:none;border:0;color:var(--pri);font-weight:700;padding:10px 0;cursor:pointer;display:block;margin:6px auto 0;font-size:14px}
+.lbl{display:block;font-size:12.5px;font-weight:700;color:var(--mut);margin:12px 0 5px}
+.inp{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px;font-size:15px;outline:none}
+.inp:focus{border-color:var(--pri2)}
+textarea.inp{min-height:76px;resize:vertical}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:2px 0 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:99px;white-space:nowrap}
+.b-ok{background:var(--oksoft);color:var(--ok)}.b-warn{background:var(--warnsoft);color:var(--warn)}.b-red{background:var(--redsoft);color:var(--red)}.b-blue{background:var(--bluesoft);color:var(--blue)}.b-mut{background:#ECEFEE;color:var(--mut)}
+.banner{border-radius:14px;padding:12px 14px;font-size:13.5px;margin-bottom:12px;display:flex;gap:10px;align-items:flex-start}
+.banner.warn{background:var(--warnsoft);color:#6b4308}.banner.ok{background:var(--oksoft);color:#14532d}.banner.red{background:var(--redsoft);color:#7f1d1d}.banner.info{background:var(--bluesoft);color:#1e3a8a}
+.ccard{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--line);margin-bottom:14px;cursor:pointer}
+.cimg{position:relative;background:linear-gradient(140deg,#EEF4F1,#DCE7E2);aspect-ratio:2/1;display:grid;place-items:center;overflow:hidden}
+.cimg img{width:100%;height:100%;object-fit:cover}
+.carsvg{width:82%;height:auto}
+.cimg .tag{position:absolute;left:10px;top:10px}
+.cbody{padding:12px 14px 14px}
+.price{font-size:18px;font-weight:800}
+.rate{font-size:13px;font-weight:700;color:#7a5200;background:#FFF4DC;padding:3px 8px;border-radius:99px}
+.gallery{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;margin:-14px -14px 12px;padding:0}
+.gallery>div{flex:none;width:100%;scroll-snap-align:start}
+.spec{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}
+.spec b{display:block;font-size:14px}.spec span{font-size:11.5px;color:var(--mut)}
+.li{display:flex;justify-content:space-between;padding:7px 0;font-size:14px}
+.li.tot{border-top:1.5px dashed var(--line);margin-top:6px;padding-top:12px;font-weight:800;font-size:16px}
+.av{width:44px;height:44px;border-radius:14px;background:var(--prisoft);color:var(--pri);display:grid;place-items:center;font-weight:800;flex:none}
+.av.lg{width:64px;height:64px;font-size:22px;border-radius:20px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}
+.stat b{display:block;font-size:20px;font-weight:800;margin-top:2px}.stat span{font-size:12px;color:var(--mut);font-weight:600}
+.hero-stat{background:linear-gradient(135deg,var(--pri),#050607);color:#fff;border-radius:20px;padding:18px;margin-bottom:12px}
+.hero-stat .big{font-size:30px;font-weight:800;margin:4px 0}
+.seg{display:flex;background:#E6EBE9;border-radius:13px;padding:4px;margin-bottom:12px}
+.seg button{flex:1;border:0;background:none;padding:9px 4px;border-radius:10px;font-weight:700;font-size:13px;color:var(--mut);cursor:pointer}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.trow{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;margin-bottom:10px;cursor:pointer}
+.thumb{width:84px;height:56px;border-radius:12px;background:linear-gradient(140deg,#EEF4F1,#DCE7E2);display:grid;place-items:center;flex:none;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}.thumb .carsvg{width:92%}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.pslot{aspect-ratio:4/3;border:2px dashed #C7D2CE;border-radius:14px;display:grid;place-items:center;cursor:pointer;overflow:hidden;background:#F8FAF9;font-weight:700;color:var(--mut);font-size:13px;position:relative}
+.pslot img{width:100%;height:100%;object-fit:cover}
+.pslot .x{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;border:0;border-radius:99px;width:24px;height:24px;cursor:pointer}
+.ph{border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:#eee;position:relative}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph span{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.6);color:#fff;font-size:10.5px;padding:2px 6px;border-radius:6px}
+.doc{width:100%;border-radius:12px;display:block;border:1px solid var(--line)}
+.stars{display:flex;gap:6px;font-size:30px;margin:6px 0}
+.stars button{background:none;border:0;cursor:pointer;color:#D3D9D7;font-size:30px;line-height:1}
+.stars button.on{color:var(--acc)}
+.sw{position:relative;width:46px;height:27px;flex:none}
+.sw input{opacity:0;width:0;height:0}
+.sw i{position:absolute;inset:0;background:#C8D1CD;border-radius:99px;cursor:pointer;transition:.2s}
+.sw i:before{content:'';position:absolute;width:21px;height:21px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+.sw input:checked+i{background:var(--ok)}.sw input:checked+i:before{transform:translateX(19px)}
+.swatch{width:30px;height:30px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer}
+.swatch.on{box-shadow:0 0 0 2.5px var(--pri)}
+.empty{text-align:center;padding:40px 20px;color:var(--mut)}
+.empty .ic{font-size:40px;margin-bottom:8px}
+.tl{position:relative;padding-left:22px}
+.tl div{position:relative;padding:0 0 12px;font-size:13.5px}
+.tl div:before{content:'';position:absolute;left:-17px;top:4px;width:10px;height:10px;border-radius:50%;background:#C8D1CD}
+.tl div.done:before{background:var(--ok)}
+.tl div:after{content:'';position:absolute;left:-13px;top:16px;bottom:-2px;width:2px;background:#E1E7E4}
+.tl div:last-child:after{display:none}
+#modal{position:fixed;inset:0;background:rgba(10,20,16,.5);display:none;z-index:50;align-items:flex-end;justify-content:center}
+#modal.on{display:flex}
+#modal .sheet{background:#fff;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;border-radius:24px 24px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+.grab{width:42px;height:5px;background:#D9DFDC;border-radius:9px;margin:-6px auto 12px}
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:#14201C;color:#fff;padding:11px 16px;border-radius:12px;font-size:13.5px;font-weight:600;opacity:0;transition:.25s;z-index:60;max-width:90%;text-align:center;pointer-events:none}
+#toast.on{opacity:1;transform:translateX(-50%)}
+.pay-opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px;cursor:pointer}
+.pay-opt.on{border-color:var(--pri);background:var(--prisoft)}
+.pay-opt .r{width:18px;height:18px;border-radius:50%;border:2px solid #AAB5B1;flex:none}
+.pay-opt.on .r{border:6px solid var(--pri)}
+.spin{width:44px;height:44px;border:4px solid var(--prisoft);border-top-color:var(--pri);border-radius:50%;animation:sp 0.8s linear infinite;margin:20px auto}
+@keyframes sp{to{transform:rotate(360deg)}}
+.check{width:84px;height:84px;border-radius:50%;background:var(--oksoft);display:grid;place-items:center;margin:20px auto 12px}
+/* login */
+.login{min-height:100vh;display:flex;flex-direction:column;background:linear-gradient(170deg,var(--pri) 0 46%,var(--bg) 46%)}
+.hero{color:#fff;text-align:center;padding:44px 20px 26px}
+.hero h1{font-size:32px;font-weight:800;letter-spacing:-.02em;margin-top:10px}
+.hero p{opacity:.85;margin-top:4px}
+.te{font-family:'Noto Sans Telugu',sans-serif;font-size:16px;color:var(--acc);opacity:1!important}
+.logo{width:72px;height:72px;border-radius:22px;background:var(--acc);display:grid;place-items:center;margin:0 auto}
+.lcard{background:#fff;margin:0 16px;border-radius:24px;padding:22px 18px;box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.phoneinp{display:flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;margin-top:14px}
+.phoneinp span{padding:12px;background:#F3F5F4;font-weight:700}
+.phoneinp input{border:0;outline:0;padding:12px;flex:1;font-size:16px;letter-spacing:.04em;min-width:0}
+.otp{text-align:center;font-size:24px;letter-spacing:.6em;margin-top:14px}
+.rolecard{display:flex;gap:14px;align-items:center;border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-top:12px;cursor:pointer;background:#fff;width:100%;text-align:left}
+.rolecard:hover{border-color:var(--pri2)}
+.rolecard .ri{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;font-size:24px;flex:none}
+.tiny{text-align:center;font-size:12px;color:var(--mut);padding:18px}
+.hr{height:1px;background:var(--line);margin:12px 0}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13.5px}
+.kv span:nth-child(odd){color:var(--mut)}
+</style>
+<div id="phone"><div id="app"></div><div id="nav"></div></div>
+<div id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet" id="sheet"></div></div>
+<div id="toast"></div>
+<script>
+/* ============ helpers ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>'₹'+Math.round(n||0).toLocaleString('en-IN');
+const HR=36e5,DAY=864e5;
+const uid=p=>p+Math.random().toString(36).slice(2,8);
+function at9(d){const x=new Date();x.setDate(x.getDate()+d);x.setHours(9,0,0,0);return x.getTime()}
+function fdt(ms){const d=new Date(ms);return d.toLocaleDateString('en-IN',{day:'numeric',month:'short'})+', '+d.toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit'})}
+function fd(ms){return new Date(ms).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}
+function toLocal(ms){const d=new Date(ms),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`}
+const initials=n=>String(n||'?').split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+const maskPh=p=>p?'+91 '+p.slice(0,5)+' •••'+p.slice(-2):'';
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),2600)}
+function modal(h){$('#sheet').innerHTML='<div class="grab"></div>'+h;$('#modal').classList.add('on')}
+function closeModal(){$('#modal').classList.remove('on')}
+
+const IC={
+ search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+ car:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M9.5 17h5M3 12h18"/></svg>',
+ user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg>',
+ chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+ cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+ id:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="8" cy="12" r="2.5"/><path d="M14 10h5M14 14h3"/></svg>',
+ gear:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>',
+ back:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>',
+ swap:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg>'
+};
+const LOGO='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2b1c00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.2"/><path d="M12 14.2V21M10 11 3.6 9.5M14 11l6.4-1.5"/></svg>';
+
+/* ============ car models & illustrations ============ */
+const MK=[
+ ['Maruti','Alto K10','mini','Hatchback','Petrol','Manual',5,1000,2000,'#B9C2CC',''],
+ ['Maruti','WagonR','tall','Hatchback','Petrol','Manual',5,1100,2500,'#F2F2F0',''],
+ ['Maruti','Swift','hatch','Hatchback','Petrol','Manual',5,1499,3000,'#D7263D',''],
+ ['Maruti','Baleno','hatch','Hatchback','Petrol','Manual',5,1599,3000,'#2D5BD8',''],
+ ['Maruti','Dzire','csedan','Sedan','Petrol','Manual',5,1699,3500,'#F2F2F0',''],
+ ['Maruti','Ciaz','sedan','Sedan','Petrol','Manual',5,2099,4000,'#2B2D31',''],
+ ['Maruti','Ertiga','muv','MUV','Petrol','Manual',7,2399,4500,'#AEB7BF',''],
+ ['Maruti','Brezza','csuv','SUV','Petrol','Manual',5,2199,4000,'#F08A24',''],
+ ['Maruti','Grand Vitara','suv','SUV','Petrol','Automatic',5,2799,5000,'#1E8C93',''],
+ ['Maruti','Fronx','cross','SUV','Petrol','Manual',5,1999,4000,'#7A1F3D',''],
+ ['Hyundai','i20','hatch','Hatchback','Petrol','Manual',5,1799,3500,'#AEB7BF',''],
+ ['Hyundai','Venue','csuv','SUV','Petrol','Automatic',5,2299,4500,'#2D5BD8',''],
+ ['Hyundai','Creta','suv','SUV','Diesel','Automatic',5,2799,5000,'#AEB7BF',''],
+ ['Hyundai','Verna','sedan','Sedan','Petrol','Automatic',5,2299,4000,'#7A1F3D',''],
+ ['Tata','Tiago','hatch','Hatchback','Petrol','Manual',5,1299,3000,'#2D5BD8',''],
+ ['Tata','Altroz','hatch','Hatchback','Diesel','Manual',5,1699,3500,'#F2F2F0',''],
+ ['Tata','Punch','micro','SUV','Petrol','Automatic',5,1399,3000,'#F08A24',''],
+ ['Tata','Nexon','csuv','SUV','Petrol','Manual',5,2299,4500,'#1E8C93',''],
+ ['Tata','Nexon EV','csuv','SUV','Electric','Automatic',5,2499,5000,'#3A9D5D','ev'],
+ ['Tata','Harrier','suv','SUV','Diesel','Manual',5,3199,6000,'#2B2D31',''],
+ ['Mahindra','Thar','boxy','SUV','Diesel','Manual',4,3299,6000,'#D7263D','spare round'],
+ ['Mahindra','Scorpio-N','suv','SUV','Diesel','Manual',7,3599,6000,'#2B2D31','rack'],
+ ['Mahindra','XUV700','suv','SUV','Diesel','Manual',7,3999,6000,'#2B2D31',''],
+ ['Mahindra','Bolero','boxy','SUV','Diesel','Manual',7,2599,5000,'#F2F2F0','round rack'],
+ ['Toyota','Innova Crysta','muv','MUV','Diesel','Manual',7,3499,6000,'#8A5A3C',''],
+ ['Toyota','Fortuner','suv','SUV','Diesel','Automatic',7,4999,8000,'#F2F2F0',''],
+ ['Toyota','Glanza','hatch','Hatchback','Petrol','Manual',5,1599,3000,'#AEB7BF',''],
+ ['Toyota','Hyryder','suv','SUV','Petrol','Automatic',5,2899,5000,'#7A1F3D',''],
+ ['Honda','City','sedan','Sedan','Petrol','Automatic',5,2199,4000,'#2D5BD8',''],
+ ['Honda','Amaze','csedan','Sedan','Petrol','Manual',5,1799,3500,'#AEB7BF',''],
+ ['Kia','Seltos','suv','SUV','Petrol','Automatic',5,2599,5000,'#1E8C93',''],
+ ['Kia','Sonet','csuv','SUV','Petrol','Manual',5,2199,4500,'#F08A24',''],
+ ['Kia','Carens','muv','MUV','Diesel','Manual',7,2699,5000,'#2B2D31',''],
+ ['Renault','Kwid','mini','Hatchback','Petrol','Manual',5,1099,2500,'#F08A24',''],
+ ['Skoda','Slavia','sedan','Sedan','Petrol','Automatic',5,2399,4500,'#D7263D',''],
+ ['Volkswagen','Virtus','sedan','Sedan','Petrol','Automatic',5,2399,4500,'#F2F2F0',''],
+ ['MG','Hector','suv','SUV','Petrol','Automatic',5,2999,5000,'#2B2D31',''],
+ ['MG','ZS EV','csuv','SUV','Electric','Automatic',5,2899,5500,'#AEB7BF','ev']
+].map(m=>({make:m[0],model:m[1],style:m[2],type:m[3],fuel:m[4],trans:m[5],seats:m[6],price:m[7],deposit:m[8],color:m[9],x:m[10],name:m[0]+' '+m[1]}));
+const STY={
+ mini:{x0:36,x1:264,deck:76,nose:84,belt:74,roof:44,rwB:44,rwT:76,wsT:152,wsB:186,wh:[74,224],wr:16,pil:[118]},
+ hatch:{x0:28,x1:272,deck:72,nose:80,belt:70,roof:44,rwB:38,rwT:70,wsT:160,wsB:196,wh:[72,226],wr:17,pil:[120]},
+ tall:{x0:36,x1:262,deck:62,nose:80,belt:70,roof:36,rwB:42,rwT:50,wsT:150,wsB:186,wh:[76,222],wr:16,pil:[116]},
+ csedan:{x0:24,x1:272,deck:70,nose:80,belt:68,roof:44,rwB:50,rwT:80,wsT:150,wsB:192,wh:[70,226],wr:17,pil:[116]},
+ sedan:{x0:18,x1:282,deck:68,nose:78,belt:66,roof:42,rwB:60,rwT:90,wsT:156,wsB:204,wh:[64,234],wr:17,pil:[120]},
+ micro:{x0:34,x1:268,deck:58,nose:76,belt:68,roof:40,rwB:40,rwT:52,wsT:160,wsB:194,wh:[76,224],wr:17,pil:[118],clad:1},
+ csuv:{x0:28,x1:274,deck:56,nose:76,belt:66,roof:38,rwB:34,rwT:48,wsT:170,wsB:206,wh:[72,228],wr:18,pil:[122],clad:1},
+ cross:{x0:28,x1:274,deck:60,nose:78,belt:68,roof:42,rwB:40,rwT:90,wsT:166,wsB:204,wh:[72,228],wr:18,pil:[124],clad:1},
+ suv:{x0:22,x1:278,deck:54,nose:74,belt:66,roof:34,rwB:30,rwT:42,wsT:174,wsB:212,wh:[68,232],wr:19,pil:[116],clad:1},
+ muv:{x0:16,x1:284,deck:56,nose:78,belt:64,roof:36,rwB:30,rwT:46,wsT:184,wsB:224,wh:[64,240],wr:18,pil:[108,150]},
+ boxy:{x0:24,x1:276,deck:60,nose:68,belt:62,roof:34,rwB:26,rwT:38,wsT:176,wsB:186,wh:[70,230],wr:19,pil:[120],clad:1}
+};
+let _sv=0;
+function modelOf(s){s=s||{};return MK.find(x=>x.make.toLowerCase()===String(s.make||'').toLowerCase()&&x.model.toLowerCase()===String(s.model||'').toLowerCase())||null}
+function carSVG(color,spec){
+ spec=spec||{};const m=modelOf(spec);
+ const sk=m?m.style:({Hatchback:'hatch',Sedan:'sedan',SUV:'suv',MUV:'muv'}[spec.type]||'hatch');
+ const P=STY[sk],xf=((m&&m.x)||'')+(spec.fuel==='Electric'?' ev':''),id='k'+(++_sv);
+ const K=1.2,Y=v=>126-(126-v)*K,{x0,x1,rwB,rwT,wsT,wsB,wh,pil,clad}=P,deck=Y(P.deck),nose=Y(P.nose),belt=Y(P.belt),roof=Y(P.roof),wr=P.wr+2;
+ const wy=126-wr,sill=wy+3,cx0=Math.max(rwB,x0+9);
+ const body=`M${x0} ${sill}L${x0} ${deck+9}Q${x0} ${deck} ${x0+9} ${deck}L${cx0} ${deck}L${rwT} ${roof}Q${(rwT+wsT)/2} ${roof-3} ${wsT} ${roof}L${wsB} ${belt}Q${(wsB+x1)/2} ${belt-1} ${x1-16} ${nose}Q${x1} ${nose+1} ${x1} ${nose+14}L${x1} ${sill}Z`;
+ const ybr=(deck+3<belt)?deck+3:belt,t=Math.max(0,Math.min(1,(deck-ybr)/(deck-roof))),xr=cx0+t*(rwT-cx0)+3;
+ const xf2=wsT+(wsB-wsT)*(6/(belt-roof))-5,xtr=rwT-(rwT-cx0)*(6/(deck-roof))+5;
+ const glass=`M${xr} ${ybr}L${xtr} ${roof+6}L${xf2} ${roof+6}L${wsB-5} ${belt}Z`;
+ const d1=pil[pil.length-1],d2=wsB-26,round=xf.includes('round');
+ const wheel=cx=>{let s=`<circle cx="${cx}" cy="${wy}" r="${wr}" fill="#15181A"/><circle cx="${cx}" cy="${wy}" r="${(wr*.68).toFixed(1)}" fill="#D3DADD"/>`;for(let k=0;k<5;k++){const a=k*Math.PI*2/5+.3;s+=`<line x1="${cx}" y1="${wy}" x2="${(cx+Math.cos(a)*wr*.62).toFixed(1)}" y2="${(wy+Math.sin(a)*wr*.62).toFixed(1)}" stroke="#7B868A" stroke-width="2.2" stroke-linecap="round"/>`}return s+`<circle cx="${cx}" cy="${wy}" r="${(wr*.2).toFixed(1)}" fill="#59636A"/>`};
+ const head=round?`<circle cx="${x1-13}" cy="${nose+9}" r="6.5" fill="#FFF1B8" stroke="#000" stroke-opacity=".5"/>`:`<path d="M${x1-26} ${nose+3}L${x1-1} ${nose+6}L${x1-1} ${nose+13}L${x1-20} ${nose+12}Z" fill="#FFF1B8" stroke="#000" stroke-opacity=".45"/>`;
+ const spare=xf.includes('spare')?`<circle cx="${x0-4}" cy="${deck+22}" r="13" fill="#1A1D1F"/><circle cx="${x0-4}" cy="${deck+22}" r="7" fill="#30363A"/>`:'';
+ const rack=xf.includes('rack')?`<g stroke="#1B1D1E" stroke-width="2.4" stroke-linecap="round"><path d="M${cx0+22} ${roof-5}L${wsT-12} ${roof-5}"/><path d="M${cx0+28} ${roof-5}v5M${wsT-18} ${roof-5}v5"/></g>`:'';
+ const ev=xf.includes('ev')?`<path d="M${x0+34} ${sill-2}L${x1-34} ${sill-2}" stroke="#35D0FF" stroke-width="2.4" stroke-linecap="round"/><rect x="${d1+12}" y="${belt+10}" width="18" height="11" rx="5.5" fill="#0B2A33"/><text x="${d1+21}" y="${belt+18.5}" font-size="8" font-weight="800" fill="#35D0FF" text-anchor="middle" font-family="sans-serif">EV</text>`:'';
+ const name=m?m.name:(spec.type||'Car');
+ return `<svg viewBox="0 0 300 150" class="carsvg" role="img" aria-label="${esc(name)}"><defs><clipPath id="c${id}"><path d="${body}"/></clipPath><clipPath id="q${id}"><path d="${glass}"/></clipPath><linearGradient id="g${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".34"/></linearGradient><linearGradient id="w${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E3F1F7"/><stop offset="1" stop-color="#7C9DAE"/></linearGradient></defs>
+<ellipse cx="${(x0+x1)/2}" cy="125" rx="${(x1-x0)/2+8}" ry="5" fill="#000" opacity=".16"/>${spare}
+<path d="${body}" fill="${color}"/>
+<g clip-path="url(#c${id})"><path d="${body}" fill="url(#g${id})"/>${clad?`<rect x="0" y="${sill-10}" width="300" height="12" fill="#000" opacity=".34"/>`:`<rect x="0" y="${sill-4}" width="300" height="6" fill="#000" opacity=".3"/>`}
+<path d="M${x0+10} ${belt+9}L${x1-8} ${belt+11}" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+<path d="M${d1+1} ${belt+1}L${d1} ${sill-5}M${d2} ${belt+1}L${d2+1} ${sill-5}" stroke="#000" stroke-opacity=".3" stroke-width="1.2" fill="none"/>
+<rect x="${d1+8}" y="${belt+5}" width="11" height="3" rx="1.5" fill="#000" opacity=".35"/><rect x="${d2-18}" y="${belt+5}" width="11" height="3" rx="1.5" fill="#000" opacity=".35"/>
+<path d="M${x0} ${deck+3}L${x0+8} ${deck+3}L${x0+6} ${deck+14}L${x0} ${deck+14}Z" fill="#E5484D"/>
+<rect x="${x1-18}" y="${nose+16}" width="20" height="7" rx="2" fill="#0E1112" opacity=".85"/><rect x="${x1-34}" y="${sill-9}" width="36" height="5" rx="2" fill="#0E1112" opacity=".6"/>
+${wh.map(cx=>`<circle cx="${cx}" cy="${wy}" r="${wr+5}" fill="#0C0E0F"/>`).join('')}</g>
+<path d="${body}" fill="none" stroke="#000" stroke-opacity=".38" stroke-width=".9" stroke-linejoin="round"/>
+${rack}${head}${ev}
+<path d="${glass}" fill="url(#w${id})" stroke="#000" stroke-opacity=".45" stroke-width="1"/>
+<g clip-path="url(#q${id})"><path d="M${wsT-70} ${roof+6}L${wsT-48} ${roof+6}L${wsT-86} ${belt}L${wsT-108} ${belt}Z" fill="#fff" opacity=".3"/></g>
+<g stroke="${color}" stroke-width="5">${pil.map(x=>`<path d="M${x} ${roof+3}L${x+2} ${belt}"/>`).join('')}</g>
+<path d="M${wsB-3} ${belt-2}l-9 0l-2 7l10 1z" fill="${color}" stroke="#000" stroke-opacity=".5" stroke-width=".8"/>
+${wh.map(wheel).join('')}</svg>`}
+
+function mtile(m,i,on,fn){return `<button class="mtile ${on?'on':''}" onclick="${fn}(${i})"><div class="mimg">${carSVG(m.color,m)}</div><b>${esc(m.model)}</b><span>${esc(m.make)} · ${fmt(m.price)}/day</span></button>`}
+function modelStrip(){const q=S.search;return `<div class="row sb" style="margin:14px 2px 6px"><span class="sec" style="margin:0">Browse by model</span><button class="btn sm ghost" style="padding:6px 10px" onclick="go('models')">See all ${MK.length}</button></div>${q.model?`<div style="margin-bottom:8px"><button class="chip on" onclick="setQ('model','')">${esc(q.model)} ✕</button></div>`:''}<div class="mstrip" id="mstrip">${MK.map((m,i)=>mtile(m,i,q.model===m.name,'setModel')).join('')}</div>`}
+function keepStrip(fn){const s=document.getElementById('mstrip'),x=s?s.scrollLeft:0;fn();const n=document.getElementById('mstrip');if(n)n.scrollLeft=x}
+function setModel(i){keepStrip(()=>{const n=MK[i].name;S.search.model=S.search.model===n?'':n;save();render()})}
+function pickFromGrid(i){S.search.model=MK[i].name;save();tab('home')}
+function modelPicker(){const D=T.car;return `<div class="card"><h3>Pick your model</h3><p class="xs mut mb">Tap your car to fill in its details and a suggested price.</p><div class="mstrip" id="mstrip">${MK.map((m,i)=>mtile(m,i,D.make===m.make&&D.model===m.model,'pickModel')).join('')}</div></div>`}
+function pickModel(i){keepStrip(()=>{const m=MK[i];Object.assign(T.car,{make:m.make,model:m.model,type:m.type,fuel:m.fuel,trans:m.trans,seats:String(m.seats),price:String(m.price),deposit:String(m.deposit),color:m.color});render()})}
+function addCatalogCars(cars,users){
+ const have=new Set(cars.map(c=>c.make+' '+c.model)),owners=users.filter(u=>u.id.startsWith('o_')).map(u=>u.id);
+ const pre={Hyderabad:'TS09',Vijayawada:'AP16',Visakhapatnam:'AP31',Bengaluru:'KA03'};
+ const areas={Hyderabad:['Madhapur','Kukatpally','Gachibowli','Secunderabad'],Vijayawada:['Benz Circle','Governorpet','Patamata'],Visakhapatnam:['MVP Colony','Gajuwaka','Dwaraka Nagar'],Bengaluru:['HSR Layout','Indiranagar','Whitefield']};
+ const FE=['AC','Bluetooth','GPS','Reverse camera','Airbags','USB charger','Sunroof','Cruise control','Android Auto'],L='ABCDEFGHJKLMNPRSTUVWXYZ';let n=0;
+ MK.forEach((m,i)=>{if(have.has(m.name))return;n++;const city=CITIES[n%4],ar=areas[city];
+  cars.push({id:'cm'+i,ownerId:owners[n%owners.length],make:m.make,model:m.model,year:2021+(n%4),city,area:ar[n%ar.length],type:m.type,fuel:m.fuel,trans:m.trans,seats:m.seats,price:m.price,deposit:m.deposit,kmLimit:300,color:m.color,reg:pre[city]+' '+L[(n*3)%L.length]+L[(n*7+2)%L.length]+' '+String(1000+(n*937)%9000),features:FE.filter((_,k)=>(k+n)%3!==0).slice(0,6),photos:[],status:'live',available:true,seedReviews:n%3===0?[{n:'Rohit',s:5,t:'Clean car, hassle-free pickup.'}]:[],created:Date.now()-(10+n)*DAY})})}
+
+const carPic=(c,i=0)=>c.photos&&c.photos[i]?`<img src="${c.photos[i]}" alt="">`:carSVG(c.color,c);
+
+function samplePhoto(label,c='#4F625C'){const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="320" height="220"><rect width="320" height="220" fill="${c}"/><rect x="12" y="12" width="296" height="196" rx="12" fill="none" stroke="#fff" stroke-opacity=".5" stroke-dasharray="6 6"/><text x="160" y="106" font-family="sans-serif" font-size="21" font-weight="700" fill="#fff" text-anchor="middle">${label}</text><text x="160" y="134" font-family="sans-serif" font-size="12" fill="#fff" fill-opacity=".75" text-anchor="middle">sample photo · ${new Date().toLocaleDateString('en-IN')}</text></svg>`;return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)}
+function readImg(file){return new Promise(r=>{if(!file)return r(null);const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const m=720,sc=Math.min(1,m/Math.max(im.width,im.height));const cv=document.createElement('canvas');cv.width=Math.round(im.width*sc);cv.height=Math.round(im.height*sc);cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);r(cv.toDataURL('image/jpeg',.62))};im.onerror=()=>r(null);im.src=fr.result};fr.onerror=()=>r(null);fr.readAsDataURL(file)})}
+
+/* ============ data ============ */
+const KEY='mytowntaxi_demo_v1';
+let S,stack=[],T={},warned=false;
+function priceFor(car,from,to,st=S.settings){const hrs=Math.max(1,(to-from)/HR);const days=Math.max(1,Math.ceil(hrs/24-1e-6));const rent=days*car.price;const fee=st.fee;const gst=Math.round((rent+fee)*st.gst/100);return{days,hrs:Math.round(hrs),rent,fee,gst,deposit:car.deposit,total:rent+fee+gst+car.deposit}}
+function mkBooking(car,renterId,from,to,st,extra={}){return Object.assign({id:'SD'+Math.floor(100000+Math.random()*900000),carId:car.id,ownerId:car.ownerId,renterId,from,to,...priceFor(car,from,to,st),comm:st.comm,status:'confirmed',pay:'UPI',before:[],after:[],startOdo:null,endOdo:null,fuelStart:'',fuelEnd:'',dep:'held',damage:0,damageNote:'',extraKm:0,extraKmCharge:0,refund:0,review:null,created:Date.now()},extra)}
+function seed(){
+ const st={comm:20,fee:99,gst:18,extraKm:10};
+ const U=(id,name,phone,kyc='approved',k={})=>({id,name,phone,kyc:{status:kyc,...k},joined:Date.now()-Math.round(Math.random()*120)*DAY});
+ const users=[U('o_ravi','Ravi Kumar','9848012345','approved',{dl:'TS09 20150012345'}),U('o_imran','Imran Khan','9849011122'),U('o_sravani','Sravani Reddy','9963044455'),U('o_lakshmi','Lakshmi Prasad','9701233344'),U('o_kiran','Kiran Rao','9886055566'),
+  U('r_anil','Anil Varma','9640077788','approved',{dl:'TS07 20190012345',aad:'8842'}),
+  U('r_priya','Priya Sharma','9123456780','pending',{dl:'AP16 20210067890',dob:'1998-04-12',aad:'4321',dlImg:samplePhoto('Driving Licence','#3C5A8A'),aadImg:samplePhoto('Aadhaar Card','#7A5A2A'),submitted:Date.now()-3*HR})];
+ const F=['AC','Bluetooth','GPS','Reverse camera','Airbags','USB charger','Sunroof','Cruise control','Android Auto'];
+ const C=(id,ownerId,make,model,year,city,type,fuel,trans,seats,price,deposit,color,reg,feat,rv,status='live')=>({id,ownerId,make,model,year,city,type,fuel,trans,seats,price,deposit,kmLimit:300,color,reg,features:feat.map(i=>F[i]),photos:[],status,available:true,seedReviews:rv,created:Date.now()-20*DAY,area:{Hyderabad:'Madhapur',Vijayawada:'Benz Circle',Visakhapatnam:'MVP Colony',Bengaluru:'HSR Layout'}[city]});
+ const R=(n,s,t)=>({n,s,t});
+ const cars=[
+  C('c1','o_ravi','Maruti','Swift',2022,'Hyderabad','Hatchback','Petrol','Manual',5,1499,3000,'#D7263D','TS09 EX 4521',[0,1,4,5],[R('Sai Teja',5,'Very clean, smooth drive to Warangal.'),R('Meena',4,'Good mileage. Pickup was on time.')]),
+  C('c2','o_imran','Hyundai','Creta',2023,'Hyderabad','SUV','Diesel','Automatic',5,2799,5000,'#AEB7BF','TS08 GH 7710',[0,1,2,3,4,6,8],[R('Rahul',5,'Perfect for our Srisailam trip.'),R('Divya',5,'Host was very helpful.')]),
+  C('c3','o_ravi','Mahindra','XUV700',2023,'Hyderabad','SUV','Diesel','Manual',7,3999,6000,'#2B2D31','TS09 FK 1203',[0,1,2,3,4,5,7,8],[R('Venkat',5,'Family of 7, all comfortable.')]),
+  C('c4','o_ravi','Honda','City',2021,'Hyderabad','Sedan','Petrol','Automatic',5,2199,4000,'#2D5BD8','TS10 AB 9087',[0,1,3,4,5],[R('Harsha',4,'Nice car, AC very good.')]),
+  C('c5','o_sravani','Toyota','Innova Crysta',2022,'Vijayawada','SUV','Diesel','Manual',7,3499,6000,'#8A5A3C','AP16 CM 3344',[0,1,2,4,5],[R('Naresh',5,'Took it to Tirupati, no issues.'),R('Kavya',4,'Slight delay at pickup but car was great.')]),
+  C('c6','o_sravani','Tata','Punch',2023,'Vijayawada','SUV','Petrol','Automatic',5,1399,3000,'#F08A24','AP16 DN 1180',[0,1,4,5],[R('Gopi',4,'Easy to drive in city traffic.')]),
+  C('c7','o_lakshmi','Kia','Seltos',2022,'Visakhapatnam','SUV','Petrol','Automatic',5,2599,5000,'#1E8C93','AP31 EK 5050',[0,1,2,3,4,6,8],[R('Arjun',5,'Araku drive was amazing in this.')]),
+  C('c8','o_lakshmi','Maruti','Baleno',2023,'Visakhapatnam','Hatchback','CNG','Manual',5,1299,3000,'#6B7280','AP31 FB 2299',[0,1,4,5,8],[]),
+  C('c9','o_kiran','Hyundai','Verna',2023,'Bengaluru','Sedan','Petrol','Automatic',5,2299,4000,'#7A1F3D','KA03 MK 6612',[0,1,2,3,4,6,8],[R('Shreya',5,'Super comfortable for Mysuru trip.')]),
+  C('c10','o_kiran','Tata','Nexon EV',2024,'Bengaluru','SUV','Electric','Automatic',5,2499,5000,'#3A9D5D','KA05 NE 2024',[0,1,2,3,4,8],[],'pending')
+ ];
+ cars[9].created=Date.now()-5*HR;addCatalogCars(cars,users);
+ const P=s=>['Front','Back','Left','Right'].map((x,i)=>samplePhoto(x+' · '+s,['#4F625C','#5C5470','#6B5B3E','#3E5C6B'][i]));
+ const bookings=[
+  mkBooking(cars[0],'r_anil',at9(-12),at9(-10),st,{status:'completed',dep:'refunded',refund:3000,startOdo:24510,endOdo:24980,before:P('before'),after:P('after'),review:{s:5,t:'Very clean car and Ravi garu was very friendly.',at:at9(-10)}}),
+  mkBooking(cars[4],'r_anil',at9(-6),at9(-4),st,{status:'completed',dep:'disputed',damage:2500,damageNote:'New scratch on rear bumper (left side). Repair estimate attached.',startOdo:61200,endOdo:61790,before:P('before'),after:P('after')}),
+  mkBooking(cars[1],'r_anil',at9(-3),at9(-2),st,{status:'completed',dep:'inspection',startOdo:18040,endOdo:18420,before:P('before'),after:P('after')}),
+  mkBooking(cars[3],'r_anil',at9(-1),at9(1),st,{status:'active',startOdo:40110,before:P('before'),fuelStart:'Full'}),
+  mkBooking(cars[2],'r_anil',at9(3),at9(5),st)
+ ];
+ return{v:1,users,cars,bookings,settings:st,session:null,search:{city:'Hyderabad',from:at9(1),to:at9(2),model:'',type:'All',fuel:'All',trans:'All',sort:'rec'}};
+}
+function load(){try{const s=localStorage.getItem(KEY);if(s){S=JSON.parse(s);if(S&&S.v===1)return}}catch(e){}S=seed()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){if(!warned){warned=true;toast('Phone storage is full — new changes are kept for this session only')}}}
+const me=()=>S.session.uid==='admin'?{id:'admin',name:'Platform Admin',phone:'',kyc:{status:'approved'}}:S.users.find(u=>u.id===S.session.uid);
+const userById=id=>S.users.find(u=>u.id===id)||{name:'User',phone:'',kyc:{}};
+const carById=id=>S.cars.find(c=>c.id===id);
+const bkById=id=>S.bookings.find(b=>b.id===id);
+const carName=c=>c?`${c.make} ${c.model}`:'Car';
+function reviews(c){return [...c.seedReviews.map(r=>({n:r.n,s:r.s,t:r.t})),...S.bookings.filter(b=>b.carId===c.id&&b.review).map(b=>({n:userById(b.renterId).name,s:b.review.s,t:b.review.t}))]}
+function rating(c){const r=reviews(c);return r.length?{avg:(r.reduce((a,x)=>a+x.s,0)/r.length).toFixed(1),n:r.length}:null}
+function isFree(cid,from,to,ignore){return !S.bookings.some(b=>b.carId===cid&&b.id!==ignore&&(b.status==='confirmed'||b.status==='active')&&b.from<to&&from<b.to)}
+const payout=b=>Math.round(b.rent*(1-b.comm/100))+(b.dep==='partial'?b.damage:0)+(['refunded','partial'].includes(b.dep)?b.extraKmCharge:0);
+const platformRev=b=>b.status==='cancelled'?0:Math.round(b.rent*b.comm/100)+b.fee;
+function depLabel(b){return{held:['Held — refunded after the trip','b-blue'],inspection:['Host inspecting car (max 48 h)','b-warn'],disputed:['Damage claim under review','b-red'],refunded:['Refunded '+fmt(b.refund),'b-ok'],partial:['Refunded '+fmt(b.refund)+' after deduction','b-warn'],refunded_cancel:['Cancelled · '+fmt(b.refund)+' refunded','b-mut']}[b.dep]||['—','b-mut']}
+function stLabel(b){return{confirmed:['Upcoming','b-blue'],active:['On trip','b-ok'],completed:['Completed','b-mut'],cancelled:['Cancelled','b-red']}[b.status]}
+const badge=([t,c])=>`<span class="badge ${c}">${esc(t)}</span>`;
+function kycBadge(u){const s=u.kyc?.status||'none';return badge({none:['KYC not done','b-red'],pending:['KYC under review','b-warn'],approved:['✓ Verified','b-ok'],rejected:['KYC rejected','b-red']}[s])}
+
+/* ============ navigation ============ */
+const TABS={
+ renter:[['home','Explore','search'],['trips','My trips','car'],['profile','Profile','user']],
+ owner:[['odash','Dashboard','chart'],['ocars','My cars','car'],['obookings','Bookings','cal'],['profile','Profile','user']],
+ admin:[['adash','Overview','chart'],['akyc','KYC','id'],['alist','Listings','car'],['abook','Bookings','cal'],['aset','Settings','gear']]};
+function go(s,p){stack.push({s,p:p||{}});render();scrollTo(0,0)}
+function back(){if(stack.length>1)stack.pop();render();scrollTo(0,0)}
+function tab(s){stack=[{s,p:{}}];render();scrollTo(0,0)}
+function home(){stack=[{s:TABS[S.session.mode][0][0],p:{}}];render();scrollTo(0,0)}
+function navCount(s){if(S.session.mode==='admin'){if(s==='akyc')return S.users.filter(u=>u.kyc.status==='pending').length;if(s==='alist')return S.cars.filter(c=>c.status==='pending').length;if(s==='abook')return S.bookings.filter(b=>b.dep==='disputed').length}
+ if(S.session.mode==='owner'&&s==='obookings')return S.bookings.filter(b=>b.ownerId===S.session.uid&&b.dep==='inspection').length;return 0}
+const SCR={};
+SCR.models=()=>{const makes=[...new Set(MK.map(m=>m.make))];return{title:'All car models',body:`<p class="sm mut mb">${MK.length} models from ${makes.length} brands. Tap a model to see cars of that model.</p>${makes.map(mk=>`<div class="sec">${esc(mk)}</div><div class="grid2">${MK.map((m,i)=>m.make===mk?mtile(m,i,false,'pickFromGrid'):'').join('')}</div>`).join('')}`}};
+function render(){
+ const app=$('#app'),nav=$('#nav');
+ if(!S.session){app.innerHTML=scrLogin();nav.style.display='none';return}
+ if(!stack.length)stack=[{s:TABS[S.session.mode][0][0],p:{}}];
+ const cur=stack[stack.length-1];const out=(SCR[cur.s]||SCR.home)(cur.p);
+ const modeName={renter:'Renter',owner:'Owner',admin:'Admin'}[S.session.mode];
+ app.innerHTML=`<div class="bar">${stack.length>1?`<button class="ib" onclick="back()" aria-label="Back">${IC.back}</button>`:''}<h1>${out.title}</h1><span class="pill">${modeName}</span></div><div class="content">${out.body}</div>${out.foot?`<div class="foot">${out.foot}</div>`:''}`;
+ const showNav=stack.length===1&&!out.foot;
+ nav.style.display=showNav?'flex':'none';
+ $('#phone').style.paddingBottom=(showNav||out.foot)?'88px':'20px';
+ if(showNav)nav.innerHTML=TABS[S.session.mode].map(([s,l,i])=>{const n=navCount(s);return `<button class="${cur.s===s?'on':''}" onclick="tab('${s}')">${IC[i]}${l}${n?`<span class="cnt">${n}</span>`:''}</button>`}).join('');
+}
+
+/* ============ login ============ */
+function scrLogin(){
+ const L=T.login||(T.login={step:'phone'});let h='';
+ if(L.step==='phone')h=`<h2>Login or sign up</h2><p class="mut sm mt">Enter your mobile number to continue</p><div class="phoneinp"><span>+91</span><input id="ph" inputmode="numeric" maxlength="10" placeholder="98480 12345" value="${esc(L.phone||'')}" onkeydown="if(event.key==='Enter')loginPhone()"></div><button class="btn" onclick="loginPhone()">Send OTP</button><div class="hr"></div><p class="xs mut" style="text-align:center">Try the demo accounts</p><div class="grid2 mt"><button class="btn ghost sm" style="width:100%" onclick="quick('o_ravi','owner')">Owner: Ravi</button><button class="btn ghost sm" style="width:100%" onclick="quick('r_anil','renter')">Renter: Anil</button></div><button class="link" onclick="quick('admin','admin')">Admin panel (demo)</button>`;
+ else if(L.step==='otp')h=`<h2>Verify OTP</h2><p class="mut sm mt">Sent to +91 ${esc(L.phone)}</p><div class="banner info mt"><span>Demo OTP: <b>1234</b></span></div><input id="otp" class="inp otp" maxlength="4" inputmode="numeric" placeholder="••••" onkeydown="if(event.key==='Enter')loginOtp()"><button class="btn" onclick="loginOtp()">Verify</button><button class="link" onclick="T.login.step='phone';render()">Change number</button>`;
+ else if(L.step==='name')h=`<h2>Create your account</h2><label class="lbl">Full name (as on driving licence)</label><input id="nm" class="inp" placeholder="e.g. Suresh Babu" onkeydown="if(event.key==='Enter')loginName()"><button class="btn" onclick="loginName()">Continue</button>`;
+ else{const u=userById(L.uid);h=`<h2>Hi ${esc(u.name.split(' ')[0])} 👋</h2><p class="mut sm mt">What would you like to do today? You can switch anytime from Profile.</p>
+  <button class="rolecard" onclick="chooseRole('renter')"><div class="ri" style="background:var(--prisoft)">🚗</div><div><b>I need a car</b><div class="mut sm">Find & book self-drive cars near you</div></div></button>
+  <button class="rolecard" onclick="chooseRole('owner')"><div class="ri" style="background:#FFF4DC">🔑</div><div><b>I want to rent out my car</b><div class="mut sm">List your car and earn when it's idle</div></div></button>`}
+ return `<div class="login"><div class="hero"><div class="logo">${LOGO}</div><h1>MY TOWN TAXI</h1><p>Self-drive cars from local owners</p><p class="te mt">మన ఊరు · మన కారు</p></div><div class="lcard">${h}</div><p class="tiny">Demo app · OTP, payments and KYC checks are simulated</p></div>`}
+function loginPhone(){const v=$('#ph').value.replace(/\D/g,'');if(!/^[6-9]\d{9}$/.test(v))return toast('Enter a valid 10-digit mobile number');T.login={step:'otp',phone:v};render();setTimeout(()=>$('#otp')&&$('#otp').focus(),60)}
+function loginOtp(){if($('#otp').value.trim()!=='1234')return toast('Wrong OTP — use 1234 in this demo');const u=S.users.find(u=>u.phone===T.login.phone);if(u){T.login.uid=u.id;T.login.step='role'}else T.login.step='name';render()}
+function loginName(){const n=$('#nm').value.trim();if(n.length<2)return toast('Please enter your name');const u={id:uid('u_'),name:n,phone:T.login.phone,kyc:{status:'none'},joined:Date.now()};S.users.push(u);T.login.uid=u.id;T.login.step='role';save();render()}
+function chooseRole(m){S.session={uid:T.login.uid,mode:m};T.login=null;save();home()}
+function quick(id,m){S.session={uid:id,mode:m};T.login=null;save();home();toast(id==='admin'?'Logged in as Admin':'Logged in as '+userById(id).name)}
+
+/* ============ RENTER ============ */
+const CITIES=['Hyderabad','Vijayawada','Visakhapatnam','Bengaluru'];
+function setQ(k,v){S.search[k]=v;save();render()}
+function setDate(k,v){const t=new Date(v).getTime();if(isNaN(t))return;S.search[k]=t;if(k==='from'&&S.search.to<=t)S.search.to=t+DAY;save();render()}
+function durText(f,t){const h=Math.round((t-f)/HR);if(h<=0)return'';const d=Math.floor(h/24),r=h%24;return (d?d+' day'+(d>1?'s':''):'')+(r?(d?' ':'')+r+' hr':'')}
+SCR.home=()=>{
+ const q=S.search,u=me();const bad=q.to<=q.from||q.from<Date.now()-HR;
+ let list=S.cars.filter(c=>c.status==='live'&&c.available&&c.city===q.city&&(!q.model||(c.make+' '+c.model)===q.model)&&(q.type==='All'||c.type===q.type)&&(q.fuel==='All'||c.fuel===q.fuel)&&(q.trans==='All'||c.trans===q.trans)).map(c=>({c,ok:isFree(c.id,q.from,q.to),r:rating(c)}));
+ const srt={rec:(a,b)=>(b.ok-a.ok)||((b.r?+b.r.avg:0)-(a.r?+a.r.avg:0)),low:(a,b)=>a.c.price-b.c.price,high:(a,b)=>b.c.price-a.c.price,rating:(a,b)=>(b.r?+b.r.avg:0)-(a.r?+a.r.avg:0)};
+ list.sort(srt[q.sort]);
+ const ch=(k,opts)=>`<div class="chips">${opts.map(([v,l])=>`<button class="chip ${q[k]===v?'on':''}" onclick="setQ('${k}','${v}')">${l}</button>`).join('')}</div>`;
+ const kycWarn=u.kyc.status!=='approved'?`<div class="banner warn" onclick="go('kyc')" style="cursor:pointer"><span>🪪</span><span><b>${u.kyc.status==='pending'?'KYC under review':'Verify your driving licence'}</b><br>${u.kyc.status==='pending'?'You can book once admin approves your documents.':'Required before your first booking. Takes 2 minutes →'}</span></div>`:'';
+ return{title:'Find a self-drive car',body:`${kycWarn}
+ <div class="card">
+  <label class="lbl" style="margin-top:0">City</label>${ch('city',CITIES.map(c=>[c,c]))}
+  <div class="grid2"><div><label class="lbl">Pickup</label><input class="inp" type="datetime-local" value="${toLocal(q.from)}" onchange="setDate('from',this.value)"></div><div><label class="lbl">Return</label><input class="inp" type="datetime-local" value="${toLocal(q.to)}" onchange="setDate('to',this.value)"></div></div>
+  ${bad?`<div class="banner red mt">Pick a future pickup time and a return time after pickup.</div>`:`<p class="sm mut mt">Trip length: <b style="color:var(--ink)">${durText(q.from,q.to)}</b> · billed per day</p>`}
+ </div>
+ ${modelStrip()}
+ ${ch('type',[['All','All types'],['Hatchback','Hatchback'],['Sedan','Sedan'],['SUV','SUV'],['MUV','MUV']])}
+ ${ch('fuel',[['All','Any fuel'],['Petrol','Petrol'],['Diesel','Diesel'],['CNG','CNG'],['Electric','Electric']])}
+ ${ch('trans',[['All','Any gearbox'],['Manual','Manual'],['Automatic','Automatic']])}
+ <div class="row sb" style="margin:12px 2px 10px"><span class="sm b">${list.filter(x=>x.ok).length} cars available in ${q.city}</span><select class="inp" style="width:auto;padding:7px 10px;font-size:13px" onchange="setQ('sort',this.value)">${[['rec','Recommended'],['low','Price: low to high'],['high','Price: high to low'],['rating','Top rated']].map(([v,l])=>`<option value="${v}" ${q.sort===v?'selected':''}>${l}</option>`).join('')}</select></div>
+ ${list.length?list.map(({c,ok,r})=>`<div class="ccard" onclick="go('car',{id:'${c.id}'})" style="${ok?'':'opacity:.6'}"><div class="cimg">${carPic(c)}${ok?'':'<span class="tag badge b-red">Booked for these dates</span>'}</div><div class="cbody"><div class="row sb"><b style="font-size:16px">${esc(carName(c))}</b><span class="rate">${r?'★ '+r.avg+' ('+r.n+')':'New'}</span></div><div class="mut sm" style="margin-top:3px">${c.year} · ${c.type} · ${c.fuel} · ${c.trans} · ${c.seats} seats</div><div class="row sb mt"><span class="mut sm">📍 ${esc(c.area||c.city)} · Host ${esc(userById(c.ownerId).name.split(' ')[0])}</span><span><span class="price">${fmt(c.price)}</span><span class="mut sm">/day</span></span></div></div></div>`).join(''):`<div class="empty"><div class="ic">🔍</div>No cars match these filters in ${q.city}.<br>Try another type or fuel.</div>`}`}};
+SCR.car=({id})=>{
+ const c=carById(id);if(!c)return{title:'Car',body:'<div class="empty">This car is no longer listed.</div>'};
+ const o=userById(c.ownerId),q=S.search,r=rating(c),rv=reviews(c),p=priceFor(c,q.from,q.to),ok=isFree(c.id,q.from,q.to),own=c.ownerId===S.session.uid;
+ const pics=[carPic(c),...(c.photos||[]).slice(1).map(x=>`<img src="${x}">`)];
+ return{title:esc(carName(c)),body:`<div class="card" style="overflow:hidden"><div class="gallery">${pics.map(x=>`<div class="cimg">${x}</div>`).join('')}</div>${pics.length>1?`<p class="xs mut" style="text-align:center;margin:-6px 0 8px">Swipe for ${pics.length} photos</p>`:''}
+  <div class="row sb"><h2>${esc(carName(c))}</h2><span class="rate">${r?'★ '+r.avg:'New'}</span></div><p class="mut sm">${c.year} · ${esc(c.reg.replace(/\d{4}$/,'••••'))} · 📍 ${esc(c.area||'')}, ${c.city}</p></div>
+ <div class="grid3">${[['⛽',c.fuel,'Fuel'],['⚙️',c.trans,'Gearbox'],['👥',c.seats+' seats','Capacity'],['🚙',c.type,'Type'],['🛣️',c.kmLimit+' km','Free km/day'],['🔒',fmt(c.deposit),'Deposit']].map(([i,a,b])=>`<div class="spec">${i}<b>${a}</b><span>${b}</span></div>`).join('')}</div>
+ <div class="sec">Features</div><div class="row wrap">${c.features.map(f=>`<span class="badge b-mut">${esc(f)}</span>`).join('')||'<span class="mut sm">Not listed</span>'}</div>
+ <div class="sec">Trip rules</div><div class="card sm" style="line-height:1.7">• ${c.kmLimit} km/day included, then ${fmt(S.settings.extraKm)}/km<br>• Return with the same fuel level<br>• Refundable deposit ${fmt(c.deposit)} — returned within 48 h after inspection<br>• Photos of all 4 sides at pickup & return<br>• No smoking · Valid driving licence required</div>
+ <div class="sec">Your host</div><div class="card row"><div class="av">${initials(o.name)}</div><div style="flex:1"><b>${esc(o.name)}</b><div class="mut sm">Host since ${new Date(o.joined).getFullYear()} · ${S.cars.filter(x=>x.ownerId===o.id&&x.status==='live').length} cars</div></div>${kycBadge(o)}</div>
+ <div class="sec">Reviews (${rv.length})</div>${rv.length?rv.slice(-6).reverse().map(x=>`<div class="card"><div class="row sb"><b class="sm">${esc(x.n)}</b><span style="color:var(--acc)">${'★'.repeat(x.s)}<span style="color:#D3D9D7">${'★'.repeat(5-x.s)}</span></span></div><p class="sm mt">${esc(x.t)}</p></div>`).join(''):'<p class="mut sm">No reviews yet — be the first to drive it.</p>'}`,
+ foot:`<div class="grow"><div class="price">${fmt(p.rent)}</div><div class="xs mut">${p.days} day${p.days>1?'s':''} · ${fdt(q.from)}</div></div>${own?`<button class="btn" disabled>Your car</button>`:ok?`<button class="btn acc" onclick="go('book',{id:'${c.id}'})">Book now</button>`:`<button class="btn" disabled>Not available</button>`}`}};
+SCR.book=({id})=>{
+ const c=carById(id),q=S.search,p=priceFor(c,q.from,q.to),u=me(),k=u.kyc.status;
+ const kb=k==='approved'?`<div class="banner ok"><span>✅</span><span>Driving licence verified. You're ready to book.</span></div>`:k==='pending'?`<div class="banner warn"><span>⏳</span><span><b>KYC under review.</b> Admin must approve your documents before you can pay. (Demo: switch to Admin from Profile to approve.)</span></div>`:`<div class="banner red"><span>🪪</span><span><b>Verify your licence to book.</b> Upload your driving licence and Aadhaar once — it's reused for all trips.</span></div>`;
+ return{title:'Review & pay',body:`${kb}
+ <div class="card row"><div class="thumb">${carPic(c)}</div><div><b>${esc(carName(c))}</b><div class="mut sm">${c.trans} · ${c.fuel} · ${c.seats} seats</div><div class="mut sm">📍 ${esc(c.area||'')}, ${c.city}</div></div></div>
+ <div class="card"><div class="tl"><div class="done"><b>Pickup</b><br>${fdt(q.from)}</div><div class="done"><b>Return</b><br>${fdt(q.to)}</div></div><p class="xs mut">Exact pickup address is shared by the host after booking.</p></div>
+ <div class="card"><h3>Price details</h3>
+  <div class="li"><span>Rent (${fmt(c.price)} × ${p.days} day${p.days>1?'s':''})</span><b>${fmt(p.rent)}</b></div>
+  <div class="li"><span>Convenience fee</span><span>${fmt(p.fee)}</span></div>
+  <div class="li"><span>GST (${S.settings.gst}%)</span><span>${fmt(p.gst)}</span></div>
+  <div class="li"><span>Refundable security deposit</span><span>${fmt(p.deposit)}</span></div>
+  <div class="li tot"><span>Total payable</span><span>${fmt(p.total)}</span></div>
+  <p class="xs mut mt">Includes ${c.kmLimit*p.days} free km. Deposit is refunded within 48 h after the host checks the car.</p></div>
+ <div class="card sm"><b>Cancellation policy</b><p class="mut mt">Free cancellation up to 24 h before pickup. After that, 50% of the rent is charged. Deposit is always refunded.</p></div>`,
+ foot:`<div class="grow"><div class="price">${fmt(p.total)}</div><div class="xs mut">incl. ${fmt(p.deposit)} deposit</div></div>${k==='approved'?`<button class="btn acc" onclick="openPay('${c.id}')">Pay securely</button>`:k==='pending'?`<button class="btn" disabled>Awaiting KYC</button>`:`<button class="btn" onclick="go('kyc')">Verify now</button>`}`}};
+function openPay(cid){T.pay={cid,m:'UPI'};drawPay()}
+function drawPay(){const P=T.pay,c=carById(P.cid),p=priceFor(c,S.search.from,S.search.to);
+ const opt=(m,i,l,s)=>`<div class="pay-opt ${P.m===m?'on':''}" onclick="T.pay.m='${m}';drawPay()"><div class="r"></div><span style="font-size:22px">${i}</span><div><b>${l}</b><div class="xs mut">${s}</div></div></div>`;
+ modal(`<div class="row sb"><h3 style="margin:0">Secure checkout</h3><span class="badge b-mut">🔒 Demo gateway</span></div><p class="sm mut mb">Paying <b style="color:var(--ink)">${fmt(p.total)}</b> for ${esc(carName(c))}</p>
+ ${opt('UPI','📱','UPI','Google Pay, PhonePe, Paytm, BHIM')}${opt('Card','💳','Debit / Credit card','Visa, Mastercard, RuPay')}${opt('NB','🏦','Net banking','All major banks')}
+ ${P.m==='UPI'?`<label class="lbl">UPI ID</label><input class="inp" id="upi" placeholder="yourname@okaxis">`:P.m==='Card'?`<label class="lbl">Card number</label><input class="inp" id="cno" inputmode="numeric" maxlength="19" placeholder="4111 1111 1111 1111"><div class="grid2"><div><label class="lbl">Expiry</label><input class="inp" id="cex" placeholder="MM/YY" maxlength="5"></div><div><label class="lbl">CVV</label><input class="inp" id="cvv" type="password" inputmode="numeric" maxlength="4" placeholder="•••"></div></div>`:`<label class="lbl">Bank</label><select class="inp" id="bank">${['SBI','HDFC Bank','ICICI Bank','Axis Bank','Andhra Bank (Union)','Kotak'].map(b=>`<option>${b}</option>`).join('')}</select>`}
+ <button class="btn acc" onclick="payNow()">Pay ${fmt(p.total)}</button><p class="xs mut" style="text-align:center;margin-top:10px">No money is charged in this demo. In the live app this is Razorpay / Cashfree.</p>`)}
+function payNow(){const P=T.pay,c=carById(P.cid),q=S.search;
+ if(P.m==='UPI'&&!/^[\w.\-]{2,}@[a-z]{2,}$/i.test($('#upi').value.trim()))return toast('Enter a valid UPI ID, e.g. name@okaxis');
+ if(P.m==='Card'){if($('#cno').value.replace(/\D/g,'').length<15)return toast('Enter a valid card number');if(!/^\d\d\/\d\d$/.test($('#cex').value))return toast('Expiry should be MM/YY');if($('#cvv').value.length<3)return toast('Enter CVV')}
+ if(!isFree(c.id,q.from,q.to))return closeModal(),toast('Sorry, this car was just booked for these dates');
+ $('#sheet').innerHTML='<div class="grab"></div><div class="spin"></div><p style="text-align:center" class="b">Processing payment…</p><p class="sm mut" style="text-align:center;margin:6px 0 20px">Please don\'t close the app</p>';
+ setTimeout(()=>{const b=mkBooking(c,S.session.uid,q.from,q.to,S.settings,{pay:{UPI:'UPI',Card:'Card',NB:'Net banking'}[P.m]});S.bookings.push(b);save();closeModal();stack=[{s:'home',p:{}}];go('success',{id:b.id})},1400)}
+SCR.success=({id})=>{const b=bkById(id),c=carById(b.carId);return{title:'Booking confirmed',body:`<div class="check"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1F8A4C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div><h2 style="text-align:center">You're all set!</h2><p class="mut" style="text-align:center;margin:6px 0 16px">Booking ID <b style="color:var(--ink)">${b.id}</b></p>
+ <div class="card row"><div class="thumb">${carPic(c)}</div><div><b>${esc(carName(c))}</b><div class="sm mut">${fdt(b.from)} → ${fdt(b.to)}</div><div class="sm mut">Paid ${fmt(b.total)} via ${b.pay}</div></div></div>
+ <div class="card sm" style="line-height:1.7"><b>What happens next</b><br>1. Host ${esc(userById(c.ownerId).name)} shares the pickup location<br>2. At pickup, open the trip and tap <b>Start trip</b> — take photos of all 4 sides<br>3. At return, tap <b>End trip</b> with return photos & odometer<br>4. Deposit is refunded after the host's check</div>
+ <button class="btn" onclick="tab('trips');go('trip',{id:'${b.id}'})">View trip</button><button class="btn ghost" onclick="tab('home')">Back to Explore</button>`}};
+SCR.trips=()=>{const t=T.tt||'up',mine=S.bookings.filter(b=>b.renterId===S.session.uid);
+ const sets={up:mine.filter(b=>b.status==='confirmed').sort((a,b)=>a.from-b.from),on:mine.filter(b=>b.status==='active'),past:mine.filter(b=>b.status==='completed'||b.status==='cancelled').sort((a,b)=>b.from-a.from)};
+ const L=sets[t];
+ return{title:'My trips',body:`<div class="seg">${[['up','Upcoming'],['on','Ongoing'],['past','Past']].map(([k,l])=>`<button class="${t===k?'on':''}" onclick="T.tt='${k}';render()">${l}${sets[k].length?' ('+sets[k].length+')':''}</button>`).join('')}</div>
+ ${L.length?L.map(b=>bkRow(b,'trip')).join(''):`<div class="empty"><div class="ic">🧳</div>No ${t==='up'?'upcoming':t==='on'?'ongoing':'past'} trips.${t==='up'?`<button class="btn" onclick="tab('home')">Find a car</button>`:''}</div>`}`}};
+function bkRow(b,scr,who){const c=carById(b.carId);const extra=b.dep==='inspection'&&scr==='obk'?badge(['Action needed','b-red']):b.status==='completed'&&!b.review&&scr==='trip'?badge(['Rate trip','b-warn']):'';
+ return `<div class="trow" onclick="go('${scr}',{id:'${b.id}'})"><div class="thumb">${carPic(c)}</div><div style="flex:1;min-width:0"><div class="row sb"><b class="sm">${esc(carName(c))}</b>${badge(stLabel(b))}</div><div class="xs mut" style="margin-top:3px">${fdt(b.from)} → ${fdt(b.to)}</div><div class="row sb" style="margin-top:4px"><span class="xs mut">${who?esc(who):'#'+b.id}</span>${extra||`<span class="sm b">${fmt(scr==='obk'?payout(b):b.total)}</span>`}</div></div></div>`}
+SCR.trip=({id})=>{
+ const b=bkById(id),c=carById(b.carId),o=userById(b.ownerId);const km=b.endOdo&&b.startOdo?b.endOdo-b.startOdo:null;
+ let act='';
+ if(b.status==='confirmed')act=`<button class="btn acc" onclick="photoModal('${b.id}','before')">Start trip · upload pickup photos</button><button class="btn ghost" onclick="cancelModal('${b.id}')">Cancel booking</button>`;
+ if(b.status==='active')act=`<button class="btn acc" onclick="photoModal('${b.id}','after')">End trip · upload return photos</button>`;
+ if(b.status==='completed'&&!b.review){T.rv=T.rv&&T.rv.id===b.id?T.rv:{id:b.id,s:0};act=`<div class="card"><h3>Rate your trip</h3><div class="stars">${[1,2,3,4,5].map(i=>`<button class="${T.rv.s>=i?'on':''}" onclick="T.rv.s=${i};T.rv.t=$('#rvt').value;render()">★</button>`).join('')}</div><textarea class="inp" id="rvt" placeholder="How was the car and the host?">${esc(T.rv.t||'')}</textarea><button class="btn" onclick="submitReview('${b.id}')">Submit review</button></div>`}
+ return{title:'Trip #'+b.id,body:`<div class="card row"><div class="thumb">${carPic(c)}</div><div style="flex:1"><b>${esc(carName(c))}</b><div class="sm mut">${esc(c.reg)}</div><div class="mt">${badge(stLabel(b))}</div></div></div>
+ ${act}
+ <div class="card"><div class="tl"><div class="done"><b>Booked</b> · ${fdt(b.created)}</div><div class="${b.status!=='confirmed'&&b.status!=='cancelled'?'done':''}"><b>Pickup</b> · ${fdt(b.from)}${b.startOdo?`<br><span class="xs mut">Odometer ${b.startOdo.toLocaleString('en-IN')} km · Fuel ${esc(b.fuelStart)}</span>`:''}</div><div class="${b.status==='completed'?'done':''}"><b>Return</b> · ${fdt(b.to)}${b.endOdo?`<br><span class="xs mut">Odometer ${b.endOdo.toLocaleString('en-IN')} km · ${km} km driven</span>`:''}</div></div></div>
+ <div class="card"><div class="row sb"><b>Security deposit</b>${badge(depLabel(b))}</div>${b.extraKmCharge?`<p class="sm mt">Extra ${b.extraKm} km × ${fmt(S.settings.extraKm)} = <b>${fmt(b.extraKmCharge)}</b> deducted from deposit</p>`:''}${b.dep==='disputed'?`<p class="sm mt">Host reported damage of <b>${fmt(b.damage)}</b>: “${esc(b.damageNote)}”. Our team is comparing pickup and return photos.</p>`:''}</div>
+ <div class="card row"><div class="av">${initials(o.name)}</div><div style="flex:1"><b>${esc(o.name)}</b><div class="sm mut">Host · ${maskPh(o.phone)}</div></div><span class="xs mut">Call masked<br>in live app</span></div>
+ ${photosBlock(b)}
+ <div class="card"><h3>Payment</h3><div class="li"><span>Rent (${b.days} day${b.days>1?'s':''})</span><span>${fmt(b.rent)}</span></div><div class="li"><span>Fee + GST</span><span>${fmt(b.fee+b.gst)}</span></div><div class="li"><span>Deposit</span><span>${fmt(b.deposit)}</span></div><div class="li tot"><span>Paid via ${esc(b.pay)}</span><span>${fmt(b.total)}</span></div>${b.status==='cancelled'?`<p class="sm mt" style="color:var(--ok)">Refunded ${fmt(b.refund)} to original payment method</p>`:''}</div>
+ ${b.review?`<div class="card"><b>Your review</b><div style="color:var(--acc)">${'★'.repeat(b.review.s)}</div><p class="sm">${esc(b.review.t)}</p></div>`:''}`}};
+function photosBlock(b){if(!b.before.length&&!b.after.length)return'';const sides=['Front','Back','Left','Right'];
+ return `<div class="card"><h3>Condition photos</h3><p class="xs mut mb">Pickup vs return — used to settle any damage claim.</p>${sides.map((s,i)=>`<div class="grid2 mb"><div class="ph">${b.before[i]?`<img src="${b.before[i]}"><span>${s} · pickup</span>`:'<span>—</span>'}</div><div class="ph">${b.after[i]?`<img src="${b.after[i]}"><span>${s} · return</span>`:`<span>${s} · return pending</span>`}</div></div>`).join('')}</div>`}
+function photoModal(bid,kind){T.ph={bid,kind,imgs:{},odo:'',fuel:'Full'};drawPhoto()}
+function drawPhoto(){const P=T.ph,b=bkById(P.bid);const sides=['Front','Back','Left','Right'];
+ modal(`<h3>${P.kind==='before'?'Start trip':'End trip'} — car photos</h3><p class="sm mut">Take clear photos of all 4 sides${P.kind==='after'?' in the same angles as pickup':''}. They protect both you and the host.</p>
+ <div class="pgrid">${sides.map(s=>`<label class="pslot">${P.imgs[s]?`<img src="${P.imgs[s]}">`:`<span>📷 ${s}</span>`}<input type="file" accept="image/*" capture="environment" hidden onchange="phPick('${s}',this)"></label>`).join('')}</div>
+ <button class="link" style="margin-top:0" onclick="phSample()">Use sample photos (demo)</button>
+ <div class="grid2"><div><label class="lbl">Odometer (km)</label><input class="inp" id="odo" inputmode="numeric" value="${esc(P.odo)}" placeholder="${P.kind==='after'&&b.startOdo?'more than '+b.startOdo:'e.g. 24510'}" oninput="T.ph.odo=this.value"></div><div><label class="lbl">Fuel / charge</label><select class="inp" onchange="T.ph.fuel=this.value">${['Full','3/4','1/2','1/4','Reserve'].map(f=>`<option ${P.fuel===f?'selected':''}>${f}</option>`).join('')}</select></div></div>
+ <button class="btn acc" onclick="phSubmit()">${P.kind==='before'?'Start trip':'End trip & return car'}</button><button class="btn ghost" onclick="closeModal()">Not now</button>`)}
+async function phPick(s,inp){const d=await readImg(inp.files[0]);if(!d)return toast('Could not read that image');T.ph.imgs[s]=d;drawPhoto()}
+function phSample(){const tag=T.ph.kind==='before'?'pickup':'return';['Front','Back','Left','Right'].forEach((s,i)=>T.ph.imgs[s]=samplePhoto(s+' · '+tag,['#4F625C','#5C5470','#6B5B3E','#3E5C6B'][i]));if(!T.ph.odo){const b=bkById(T.ph.bid);T.ph.odo=String(T.ph.kind==='before'?24000+Math.floor(Math.random()*9000):(b.startOdo||0)+Math.round(180+Math.random()*420))}drawPhoto()}
+function phSubmit(){const P=T.ph,b=bkById(P.bid),c=carById(b.carId);const imgs=['Front','Back','Left','Right'].map(s=>P.imgs[s]);
+ if(imgs.some(x=>!x))return toast('Add a photo for all 4 sides');const odo=parseInt(P.odo,10);if(!(odo>0))return toast('Enter the odometer reading');
+ if(P.kind==='before'){Object.assign(b,{before:imgs,startOdo:odo,fuelStart:P.fuel,status:'active'});toast('Trip started — drive safe! 🚗')}
+ else{if(odo<=b.startOdo)return toast('Return odometer must be more than '+b.startOdo);const km=odo-b.startOdo,ex=Math.max(0,km-c.kmLimit*b.days);Object.assign(b,{after:imgs,endOdo:odo,fuelEnd:P.fuel,status:'completed',dep:'inspection',extraKm:ex,extraKmCharge:Math.min(b.deposit,ex*S.settings.extraKm),returnedAt:Date.now()});toast('Trip ended. Host will inspect the car.')}
+ save();closeModal();render()}
+function cancelModal(id){const b=bkById(id),free=b.from-Date.now()>24*HR,ref=free?b.total:b.total-Math.round(b.rent*.5);
+ modal(`<h3>Cancel this booking?</h3><p class="sm mut">${free?'You are cancelling more than 24 h before pickup, so you get a full refund.':'Pickup is less than 24 h away, so 50% of the rent is charged.'}</p><div class="card mt"><div class="li"><span>Paid</span><span>${fmt(b.total)}</span></div>${free?'':`<div class="li"><span>Cancellation charge</span><span>−${fmt(b.rent*.5)}</span></div>`}<div class="li tot"><span>Refund</span><span>${fmt(ref)}</span></div></div><button class="btn red" onclick="doCancel('${id}',${ref})">Yes, cancel booking</button><button class="btn ghost" onclick="closeModal()">Keep booking</button>`)}
+function doCancel(id,ref){const b=bkById(id);Object.assign(b,{status:'cancelled',dep:'refunded_cancel',refund:ref,cancelledBy:S.session.mode});save();closeModal();toast('Booking cancelled. '+fmt(ref)+' will be refunded.');render()}
+function submitReview(id){const t=$('#rvt').value.trim();if(!T.rv.s)return toast('Tap the stars to rate');bkById(id).review={s:T.rv.s,t:t||'—',at:Date.now()};T.rv=null;save();toast('Thanks for your review!');render()}
+
+/* KYC */
+SCR.kyc=()=>{const u=me(),k=u.kyc;
+ if(k.status==='approved')return{title:'KYC verification',body:`<div class="banner ok"><span>✅</span><span><b>You're verified.</b> Your documents are approved and you can book any car.</span></div><div class="card kv"><span>Name</span><b>${esc(u.name)}</b><span>Licence no.</span><b>${esc(k.dl||'On file')}</b><span>Aadhaar</span><b>XXXX XXXX ${esc(k.aad||'••••')}</b></div>`};
+ if(k.status==='pending')return{title:'KYC verification',body:`<div class="banner warn"><span>⏳</span><span><b>Under review.</b> Submitted ${fdt(k.submitted)}. Usually approved within 2 hours.<br><span class="xs">Demo: open Profile → Switch account → Admin to approve it.</span></span></div><div class="card kv"><span>Licence no.</span><b>${esc(k.dl)}</b><span>Date of birth</span><b>${esc(k.dob)}</b><span>Aadhaar</span><b>XXXX XXXX ${esc(k.aad)}</b></div><div class="grid2"><img class="doc" src="${k.dlImg}"><img class="doc" src="${k.aadImg}"></div>`};
+ const D=T.kyc||(T.kyc={dl:'',dob:'',aad:'',dlImg:'',aadImg:''});
+ return{title:'KYC verification',body:`${k.status==='rejected'?`<div class="banner red"><span>⚠️</span><span><b>Rejected:</b> ${esc(k.reason||'Documents unclear')}. Please upload again.</span></div>`:`<div class="banner info"><span>🛡️</span><span>We verify every driver to keep owners' cars safe. You need to be 21+ with a valid Indian driving licence.</span></div>`}
+ <div class="card"><label class="lbl" style="margin-top:0">Driving licence number</label><input class="inp" placeholder="TS09 20190012345" value="${esc(D.dl)}" oninput="T.kyc.dl=this.value.toUpperCase()" style="text-transform:uppercase">
+ <label class="lbl">Date of birth</label><input class="inp" type="date" value="${esc(D.dob)}" onchange="T.kyc.dob=this.value">
+ <label class="lbl">Aadhaar number</label><input class="inp" inputmode="numeric" maxlength="14" placeholder="1234 5678 9012" value="${esc(D.aad)}" oninput="T.kyc.aad=this.value"><p class="xs mut" style="margin-top:4px">Only the last 4 digits are stored.</p>
+ <div class="grid2 mt2"><div><label class="lbl" style="margin-top:0">Licence photo</label><label class="pslot">${D.dlImg?`<img src="${D.dlImg}">`:'<span>📷 Upload</span>'}<input type="file" accept="image/*" hidden onchange="kycPick('dlImg',this)"></label></div><div><label class="lbl" style="margin-top:0">Aadhaar photo</label><label class="pslot">${D.aadImg?`<img src="${D.aadImg}">`:'<span>📷 Upload</span>'}<input type="file" accept="image/*" hidden onchange="kycPick('aadImg',this)"></label></div></div>
+ <button class="link" onclick="kycSample()">Fill sample details (demo)</button></div>
+ <button class="btn" onclick="kycSubmit()">Submit for verification</button>`}};
+async function kycPick(k,inp){const d=await readImg(inp.files[0]);if(!d)return toast('Could not read that image');T.kyc[k]=d;render()}
+function kycSample(){Object.assign(T.kyc,{dl:'TS09 20180045678',dob:'1996-08-15',aad:'5678 1234 9012',dlImg:samplePhoto('Driving Licence','#3C5A8A'),aadImg:samplePhoto('Aadhaar Card','#7A5A2A')});render()}
+function kycSubmit(){const D=T.kyc,u=me();
+ if(!/^[A-Z]{2}[\s-]?\d{2}[\s-]?\d{6,11}$/.test(D.dl.trim()))return toast('Enter a valid licence number, e.g. TS09 20190012345');
+ if(!D.dob)return toast('Enter your date of birth');const age=(Date.now()-new Date(D.dob))/(365.25*DAY);if(age<21)return toast('You must be at least 21 to rent a self-drive car');
+ const a=D.aad.replace(/\D/g,'');if(a.length!==12)return toast('Aadhaar must be 12 digits');
+ if(!D.dlImg||!D.aadImg)return toast('Upload both document photos');
+ u.kyc={status:'pending',dl:D.dl.trim(),dob:D.dob,aad:a.slice(-4),dlImg:D.dlImg,aadImg:D.aadImg,submitted:Date.now()};T.kyc=null;save();toast('Submitted! We will verify shortly.');render()}
+
+/* PROFILE (renter + owner) */
+SCR.profile=()=>{const u=me(),m=S.session.mode,mine=S.cars.filter(c=>c.ownerId===u.id);
+ return{title:'Profile',body:`<div class="card row"><div class="av lg">${initials(u.name)}</div><div style="flex:1"><h2 style="font-size:18px">${esc(u.name)}</h2><div class="mut sm">+91 ${esc(u.phone)}</div><div class="mt">${kycBadge(u)}</div></div></div>
+ <button class="card row" style="width:100%;text-align:left;cursor:pointer" onclick="switchMode()"><div class="av" style="background:#FFF4DC">${m==='renter'?'🔑':'🚗'}</div><div style="flex:1"><b>${m==='renter'?'Switch to Owner mode':'Switch to Renter mode'}</b><div class="sm mut">${m==='renter'?'List your car and earn when it is idle':'Book a self-drive car for yourself'}</div></div>${IC.swap}</button>
+ <div class="sec">Account</div>
+ <div class="card" style="padding:4px 14px">${[['🪪','KYC & driving licence',"go('kyc')"],...(m==='owner'?[['🚙',`My cars (${mine.length})`,"tab('ocars')"]]:[['🧳','My trips',"tab('trips')"]]),['💬','Help & support',"toast('Support chat opens here in the live app')"],['📄','Terms & damage policy',"policyModal()"]].map(([i,l,f],n,a)=>`<div class="row" style="padding:13px 0;cursor:pointer;${n<a.length-1?'border-bottom:1px solid var(--line)':''}" onclick="${f}"><span>${i}</span><span style="flex:1">${l}</span><span class="mut">›</span></div>`).join('')}</div>
+ <div class="sec">Demo controls</div>
+ <div class="card" style="padding:4px 14px"><div class="row" style="padding:13px 0;cursor:pointer;border-bottom:1px solid var(--line)" onclick="acctModal()"><span>👥</span><span style="flex:1">Switch account (renter / owner / admin)</span><span class="mut">›</span></div><div class="row" style="padding:13px 0;cursor:pointer" onclick="logout()"><span>🚪</span><span style="flex:1">Log out</span><span class="mut">›</span></div></div>`}};
+function switchMode(){S.session.mode=S.session.mode==='renter'?'owner':'renter';save();home();toast(S.session.mode==='owner'?'Owner mode':'Renter mode')}
+function logout(){S.session=null;stack=[];T={};save();render();scrollTo(0,0)}
+function acctModal(){const role=u=>S.cars.some(c=>c.ownerId===u.id)?'owner':'renter';
+ modal(`<h3>Switch account (demo)</h3><p class="sm mut mb">See the same marketplace from each side.</p>${[{id:'admin',name:'Platform Admin',r:'admin',sub:'Approve KYC, listings, disputes'},...S.users.map(u=>({id:u.id,name:u.name,r:role(u),sub:(role(u)==='owner'?S.cars.filter(c=>c.ownerId===u.id).length+' cars listed':'Renter')+' · KYC '+u.kyc.status}))].map(a=>`<div class="trow" onclick="closeModal();quick('${a.id}','${a.r}')"><div class="av">${a.id==='admin'?'🛡️':initials(a.name)}</div><div style="flex:1"><b class="sm">${esc(a.name)}</b><div class="xs mut">${esc(a.sub)}</div></div>${S.session.uid===a.id?badge(['You','b-ok']):''}</div>`).join('')}<button class="btn ghost" onclick="resetDemo()">Reset all demo data</button>`)}
+function resetDemo(){try{localStorage.removeItem(KEY)}catch(e){}S=seed();stack=[];T={};closeModal();render();toast('Demo data reset')}
+function policyModal(){modal(`<h3>Damage & deposit policy</h3><div class="sm" style="line-height:1.7">• Renter uploads 4-side photos at pickup and return.<br>• Host has 48 h after return to inspect. No report = deposit auto-released.<br>• Damage claims must include an amount and description. Admin compares the photos and decides.<br>• Extra km beyond the free limit is charged at ${fmt(S.settings.extraKm)}/km from the deposit.<br>• Platform keeps ${S.settings.comm}% commission on rent; the host gets the rest.</div><button class="btn" onclick="closeModal()">Got it</button>`)}
+
+/* ============ OWNER ============ */
+SCR.odash=()=>{const u=me(),cars=S.cars.filter(c=>c.ownerId===u.id),bk=S.bookings.filter(b=>b.ownerId===u.id&&b.status!=='cancelled');
+ const earned=bk.filter(b=>b.status==='completed').reduce((a,b)=>a+payout(b),0),upcoming=bk.filter(b=>b.status!=='completed').reduce((a,b)=>a+payout(b),0);
+ const insp=bk.filter(b=>b.dep==='inspection'),pend=cars.filter(c=>c.status==='pending'),rated=cars.map(rating).filter(Boolean);
+ if(!cars.length)return{title:'Owner dashboard',body:`<div class="empty"><div class="ic">🔑</div><h2 style="color:var(--ink)">Earn from your car</h2><p class="mt">Hosts in Hyderabad earn ₹25,000–₹45,000 a month (illustrative) by renting out cars they don't use daily.</p><button class="btn acc" onclick="go('oadd')">List your first car</button><button class="link" onclick="quick('o_ravi','owner')">Explore demo owner (Ravi Kumar)</button></div>`};
+ return{title:'Hi, '+esc(u.name.split(' ')[0]),body:`<div class="hero-stat"><span class="sm" style="opacity:.8">Total earnings</span><div class="big">${fmt(earned)}</div><span class="sm" style="opacity:.85">+ ${fmt(upcoming)} from upcoming & ongoing trips</span></div>
+ <div class="grid3"><div class="stat"><span>Live cars</span><b>${cars.filter(c=>c.status==='live').length}</b></div><div class="stat"><span>Trips</span><b>${bk.length}</b></div><div class="stat"><span>Rating</span><b>${rated.length?'★ '+(rated.reduce((a,r)=>a+ +r.avg,0)/rated.length).toFixed(1):'—'}</b></div></div>
+ ${insp.length||pend.length?`<div class="sec">Needs your attention</div>${insp.map(b=>`<div class="banner warn" style="cursor:pointer" onclick="go('obk',{id:'${b.id}'})"><span>🔍</span><span><b>Inspect ${esc(carName(carById(b.carId)))}</b><br>Returned by ${esc(userById(b.renterId).name)}. Release deposit or report damage →</span></div>`).join('')}${pend.map(c=>`<div class="banner info"><span>⏳</span><span><b>${esc(carName(c))}</b> is waiting for admin approval.</span></div>`).join('')}`:''}
+ <div class="sec">Upcoming & ongoing</div>${bk.filter(b=>b.status==='confirmed'||b.status==='active').sort((a,b)=>a.from-b.from).map(b=>bkRow(b,'obk',userById(b.renterId).name)).join('')||'<p class="mut sm">No upcoming trips yet.</p>'}
+ <button class="btn acc" onclick="go('oadd')">+ List another car</button>`}};
+SCR.ocars=()=>{const cars=S.cars.filter(c=>c.ownerId===S.session.uid);
+ return{title:'My cars',body:`${cars.map(c=>{const sb=c.status==='live'?(c.available?['Live','b-ok']:['Paused','b-mut']):c.status==='pending'?['Pending approval','b-warn']:['Rejected','b-red'];const n=S.bookings.filter(b=>b.carId===c.id&&b.status!=='cancelled').length;
+ return `<div class="card"><div class="row" style="cursor:pointer" onclick="go('oadd',{id:'${c.id}'})"><div class="thumb">${carPic(c)}</div><div style="flex:1;min-width:0"><div class="row sb"><b class="sm">${esc(carName(c))}</b>${badge(sb)}</div><div class="xs mut">${esc(c.reg)} · ${c.city}</div><div class="sm mt"><b>${fmt(c.price)}</b><span class="mut">/day · ${n} trip${n===1?'':'s'}</span></div></div></div>${c.status==='rejected'?`<p class="xs mt" style="color:var(--red)">Reason: ${esc(c.reason||'Details incomplete')}. Edit and resubmit.</p>`:''}${c.status==='live'?`<div class="hr"></div><div class="row sb"><span class="sm">Available for booking</span><label class="sw"><input type="checkbox" ${c.available?'checked':''} onchange="carById('${c.id}').available=this.checked;save();render();toast(this.checked?'Car is live':'Car paused — hidden from search')"><i></i></label></div>`:''}</div>`}).join('')||`<div class="empty"><div class="ic">🚙</div>You haven't listed any cars yet.</div>`}
+ <button class="btn acc" onclick="go('oadd')">+ Add a car</button>`}};
+const COLORS=['#D7263D','#2D5BD8','#2B2D31','#AEB7BF','#F2F2F0','#1E8C93','#8A5A3C','#F08A24','#3A9D5D','#7A1F3D'];
+const FEATS=['AC','Bluetooth','GPS','Reverse camera','Airbags','USB charger','Sunroof','Cruise control','Android Auto','Child seat','FASTag'];
+SCR.oadd=({id})=>{const ex=id&&carById(id);
+ if(!T.car||T.car._id!==(id||'new'))T.car=ex?{...JSON.parse(JSON.stringify(ex)),_id:id}:{_id:'new',make:'',model:'',year:'2022',reg:'',city:me().kyc&&S.search.city||'Hyderabad',area:'',type:'Hatchback',fuel:'Petrol',trans:'Manual',seats:'5',price:'1500',deposit:'3000',kmLimit:'300',color:COLORS[0],features:['AC','Airbags'],photos:[]};
+ const D=T.car,f=k=>`value="${esc(D[k])}" oninput="T.car['${k}']=this.value"`,sel=(k,o)=>`<select class="inp" onchange="T.car['${k}']=this.value;${k==='type'?'render()':''}">${o.map(x=>`<option ${String(D[k])===String(x)?'selected':''}>${x}</option>`).join('')}</select>`;
+ const sugg=Math.round(({Hatchback:1400,Sedan:2100,SUV:2900,MUV:3200}[D.type]||1500)/100)*100;
+ return{title:ex?'Edit car':'List your car',body:`${ex&&ex.status==='live'?'':'<div class="banner info"><span>🛡️</span><span>Every listing is checked by our team before it goes live — usually within a few hours.</span></div>'}
+ ${ex?'':modelPicker()}<div class="card" style="overflow:hidden"><div class="cimg" style="margin:-14px -14px 10px">${D.photos[0]?`<img src="${D.photos[0]}">`:carSVG(D.color,D)}</div>
+  <label class="lbl" style="margin-top:0">Photos (up to 6) — first one is the cover</label>
+  <div class="pgrid" style="grid-template-columns:repeat(3,1fr)">${D.photos.map((p,i)=>`<div class="pslot"><img src="${p}"><button class="x" onclick="T.car.photos.splice(${i},1);render()">×</button></div>`).join('')}${D.photos.length<6?`<label class="pslot"><span>+ Add</span><input type="file" accept="image/*" multiple hidden onchange="carPhotos(this)"></label>`:''}</div>
+  <label class="lbl">Colour (used when no photo)</label><div class="row wrap">${COLORS.map(c=>`<div class="swatch ${D.color===c?'on':''}" style="background:${c}" onclick="T.car.color='${c}';render()"></div>`).join('')}</div></div>
+ <div class="card"><h3>Car details</h3><div class="grid2"><div><label class="lbl">Brand</label><input class="inp" placeholder="Maruti" ${f('make')}></div><div><label class="lbl">Model</label><input class="inp" placeholder="Swift" ${f('model')}></div><div><label class="lbl">Year</label>${sel('year',[2025,2024,2023,2022,2021,2020,2019,2018,2017,2016])}</div><div><label class="lbl">Seats</label>${sel('seats',[4,5,6,7,8])}</div><div><label class="lbl">Type</label>${sel('type',['Hatchback','Sedan','SUV','MUV'])}</div><div><label class="lbl">Fuel</label>${sel('fuel',['Petrol','Diesel','CNG','Electric'])}</div></div>
+  <label class="lbl">Gearbox</label>${sel('trans',['Manual','Automatic'])}
+  <label class="lbl">Registration number</label><input class="inp" placeholder="TS09 EX 4521" style="text-transform:uppercase" ${f('reg')}></div>
+ <div class="card"><h3>Location</h3><div class="grid2"><div><label class="lbl" style="margin-top:0">City</label>${sel('city',CITIES)}</div><div><label class="lbl" style="margin-top:0">Area</label><input class="inp" placeholder="Kukatpally" ${f('area')}></div></div></div>
+ <div class="card"><h3>Pricing</h3><div class="grid2"><div><label class="lbl" style="margin-top:0">Price per day (₹)</label><input class="inp" inputmode="numeric" ${f('price')}></div><div><label class="lbl" style="margin-top:0">Security deposit (₹)</label><input class="inp" inputmode="numeric" ${f('deposit')}></div></div><label class="lbl">Free km per day</label>${sel('kmLimit',[200,250,300,400,'Unlimited'].map(String))}
+  <p class="xs mut mt">💡 Similar ${D.type.toLowerCase()}s in ${esc(D.city)} rent for about ${fmt(sugg)}/day. You keep ${100-S.settings.comm}% of the rent.</p></div>
+ <div class="card"><h3>Features</h3><div class="row wrap">${FEATS.map(x=>`<button class="chip ${D.features.includes(x)?'on':''}" onclick="togFeat('${x}')">${x}</button>`).join('')}</div></div>
+ ${ex?`<button class="btn ghost" style="color:var(--red)" onclick="delCar('${ex.id}')">Remove this listing</button>`:''}`,
+ foot:`<button class="btn acc" style="flex:1" onclick="saveCar()">${ex?'Save changes':'Submit for approval'}</button>`}};
+async function carPhotos(inp){const fs=[...inp.files].slice(0,6-T.car.photos.length);for(const f of fs){const d=await readImg(f);if(d)T.car.photos.push(d)}render()}
+function togFeat(x){const a=T.car.features,i=a.indexOf(x);i<0?a.push(x):a.splice(i,1);render()}
+function saveCar(){const D=T.car;
+ if(D.make.trim().length<2||D.model.trim().length<1)return toast('Enter brand and model');
+ const reg=D.reg.trim().toUpperCase().replace(/\s+/g,' ');if(!/^[A-Z]{2}\s?\d{1,2}\s?[A-Z]{0,3}\s?\d{1,4}$/.test(reg))return toast('Enter a valid registration, e.g. TS09 EX 4521');
+ const price=parseInt(D.price,10),dep=parseInt(D.deposit,10);if(!(price>=500&&price<=20000))return toast('Price per day should be ₹500 – ₹20,000');if(!(dep>=0&&dep<=50000))return toast('Deposit should be ₹0 – ₹50,000');
+ if(S.cars.some(c=>c.reg.replace(/\s/g,'')===reg.replace(/\s/g,'')&&c.id!==D._id))return toast('A car with this registration is already listed');
+ const km=D.kmLimit==='Unlimited'?9999:parseInt(D.kmLimit,10);
+ const data={make:D.make.trim(),model:D.model.trim(),year:+D.year,reg,city:D.city,area:D.area.trim()||D.city,type:D.type,fuel:D.fuel,trans:D.trans,seats:+D.seats,price,deposit:dep,kmLimit:km,color:D.color,features:D.features.slice(),photos:D.photos.slice()};
+ if(D._id==='new'){S.cars.push({id:uid('c'),ownerId:S.session.uid,...data,status:'pending',available:true,seedReviews:[],created:Date.now()});toast('Submitted! Admin will review your listing.')}
+ else{const c=carById(D._id);Object.assign(c,data);if(c.status==='rejected'){c.status='pending';c.reason=''}toast('Changes saved')}
+ T.car=null;save();tab('ocars')}
+function delCar(id){if(S.bookings.some(b=>b.carId===id&&(b.status==='confirmed'||b.status==='active')))return toast('This car has upcoming trips — pause it instead');
+ modal(`<h3>Remove listing?</h3><p class="sm mut">It will disappear from search. Past trips stay in your history.</p><button class="btn red" onclick="S.cars=S.cars.filter(c=>c.id!=='${id}');S.bookings=S.bookings.filter(b=>b.carId!=='${id}'||b.status==='completed'||b.status==='cancelled');T.car=null;save();closeModal();tab('ocars');toast('Listing removed')">Remove</button><button class="btn ghost" onclick="closeModal()">Keep it</button>`)}
+SCR.obookings=()=>{const t=T.ot||'up',mine=S.bookings.filter(b=>b.ownerId===S.session.uid);
+ const sets={up:mine.filter(b=>b.status==='confirmed'||b.status==='active').sort((a,b)=>a.from-b.from),act:mine.filter(b=>b.dep==='inspection'||b.dep==='disputed'),done:mine.filter(b=>b.status==='completed'||b.status==='cancelled').sort((a,b)=>b.from-a.from)};
+ return{title:'Bookings',body:`<div class="seg">${[['up','Upcoming'],['act','Inspect'],['done','History']].map(([k,l])=>`<button class="${t===k?'on':''}" onclick="T.ot='${k}';render()">${l}${sets[k].length?' ('+sets[k].length+')':''}</button>`).join('')}</div>${sets[t].map(b=>bkRow(b,'obk',userById(b.renterId).name)).join('')||'<div class="empty"><div class="ic">📅</div>Nothing here yet.</div>'}`}};
+SCR.obk=({id})=>{const b=bkById(id),c=carById(b.carId),r=userById(b.renterId),km=b.endOdo&&b.startOdo?b.endOdo-b.startOdo:null;
+ return{title:'Booking #'+b.id,body:`<div class="card row"><div class="thumb">${carPic(c)}</div><div style="flex:1"><b>${esc(carName(c))}</b><div class="sm mut">${fdt(b.from)} → ${fdt(b.to)}</div><div class="mt">${badge(stLabel(b))}</div></div></div>
+ ${b.dep==='inspection'?`<div class="card" style="border-color:var(--acc)"><h3>Inspect the car</h3><p class="sm mut">Compare the pickup and return photos below and check the car in person. If you do nothing, the deposit is released automatically after 48 h.</p>${b.extraKmCharge?`<p class="sm mt">Extra ${b.extraKm} km driven → you receive <b>${fmt(b.extraKmCharge)}</b> from the deposit.</p>`:''}<button class="btn" onclick="releaseDep('${b.id}')">✓ No damage — release deposit</button><button class="btn ghost" style="color:var(--red)" onclick="damageModal('${b.id}')">Report damage</button></div>`:''}
+ ${b.dep==='disputed'?`<div class="banner red"><span>⚖️</span><span>You claimed <b>${fmt(b.damage)}</b> for damage. Admin is reviewing the photos.</span></div>`:''}
+ <div class="card row"><div class="av">${initials(r.name)}</div><div style="flex:1"><b>${esc(r.name)}</b><div class="sm mut">Renter · ${maskPh(r.phone)}</div></div>${kycBadge(r)}</div>
+ <div class="card"><h3>Your earnings</h3><div class="li"><span>Rent (${b.days} day${b.days>1?'s':''})</span><span>${fmt(b.rent)}</span></div><div class="li"><span>Platform commission (${b.comm}%)</span><span>−${fmt(b.rent*b.comm/100)}</span></div>${b.extraKmCharge&&['refunded','partial'].includes(b.dep)?`<div class="li"><span>Extra km charge</span><span>+${fmt(b.extraKmCharge)}</span></div>`:''}${b.dep==='partial'?`<div class="li"><span>Damage compensation</span><span>+${fmt(b.damage)}</span></div>`:''}<div class="li tot"><span>${b.status==='cancelled'?'Cancelled':b.status==='completed'?'Paid to your bank':'You will receive'}</span><span>${b.status==='cancelled'?fmt(0):fmt(payout(b))}</span></div>${b.status!=='cancelled'?'<p class="xs mut mt">Payouts are sent to your bank 24 h after the trip ends.</p>':''}</div>
+ ${km!==null?`<div class="card kv"><span>Odometer</span><b>${b.startOdo.toLocaleString('en-IN')} → ${b.endOdo.toLocaleString('en-IN')} km</b><span>Distance</span><b>${km} km</b><span>Fuel</span><b>${esc(b.fuelStart)} → ${esc(b.fuelEnd)}</b></div>`:''}
+ ${photosBlock(b)}
+ ${b.review?`<div class="card"><b>Renter's review</b><div style="color:var(--acc)">${'★'.repeat(b.review.s)}</div><p class="sm">${esc(b.review.t)}</p></div>`:''}
+ ${b.status==='confirmed'?`<button class="btn ghost" style="color:var(--red)" onclick="ownerCancel('${b.id}')">Cancel this booking</button>`:''}`}};
+function releaseDep(id){const b=bkById(id);b.dep='refunded';b.refund=b.deposit-b.extraKmCharge;save();toast('Deposit released to renter');render()}
+function damageModal(id){const b=bkById(id);modal(`<h3>Report damage</h3><p class="sm mut">Admin will compare pickup & return photos before deducting from the ${fmt(b.deposit)} deposit.</p><label class="lbl">Amount to claim (₹)</label><input class="inp" id="dam" inputmode="numeric" placeholder="e.g. 2500"><label class="lbl">What is damaged?</label><textarea class="inp" id="damn" placeholder="e.g. Dent on front-left door, not in pickup photos"></textarea><button class="btn red" onclick="submitDamage('${id}')">Submit claim</button><button class="btn ghost" onclick="closeModal()">Cancel</button>`)}
+function submitDamage(id){const b=bkById(id),a=parseInt($('#dam').value,10),n=$('#damn').value.trim();const max=b.deposit-b.extraKmCharge;if(!(a>0))return toast('Enter the claim amount');if(a>max)return toast('Claim can be at most '+fmt(max)+' (remaining deposit)');if(n.length<8)return toast('Describe the damage');Object.assign(b,{dep:'disputed',damage:a,damageNote:n});save();closeModal();toast('Claim sent to admin');render()}
+function ownerCancel(id){const b=bkById(id);modal(`<h3>Cancel as host?</h3><p class="sm mut">The renter gets a full refund of ${fmt(b.total)}. Frequent host cancellations lower your ranking in search.</p><button class="btn red" onclick="doCancel('${id}',${b.total})">Cancel booking</button><button class="btn ghost" onclick="closeModal()">Keep</button>`)}
+
+/* ============ ADMIN ============ */
+SCR.adash=()=>{const bk=S.bookings.filter(b=>b.status!=='cancelled');const gmv=bk.reduce((a,b)=>a+b.rent,0),rev=bk.reduce((a,b)=>a+platformRev(b),0),held=S.bookings.filter(b=>['held','inspection','disputed'].includes(b.dep)&&b.status!=='cancelled').reduce((a,b)=>a+b.deposit,0);
+ const pk=S.users.filter(u=>u.kyc.status==='pending').length,pl=S.cars.filter(c=>c.status==='pending').length,dp=S.bookings.filter(b=>b.dep==='disputed').length;
+ const byCity=CITIES.map(c=>[c,bk.filter(b=>carById(b.carId)?.city===c).reduce((a,b)=>a+b.rent,0)]),mx=Math.max(1,...byCity.map(x=>x[1]));
+ return{title:'Admin overview',body:`<div class="hero-stat"><span class="sm" style="opacity:.8">Platform revenue (commission + fees)</span><div class="big">${fmt(rev)}</div><span class="sm" style="opacity:.85">from ${fmt(gmv)} rent booked · ${S.settings.comm}% commission</span></div>
+ <div class="grid2"><div class="stat"><span>Users</span><b>${S.users.length}</b></div><div class="stat"><span>Live cars</span><b>${S.cars.filter(c=>c.status==='live').length}</b></div><div class="stat"><span>Bookings</span><b>${bk.length}</b></div><div class="stat"><span>Deposits held</span><b>${fmt(held)}</b></div></div>
+ <div class="sec">Action queues</div>${[['akyc','🪪','KYC to verify',pk],['alist','🚙','Car listings to approve',pl],['abook','⚖️','Damage disputes',dp]].map(([s,i,l,n])=>`<div class="trow" onclick="tab('${s}')"><div class="av">${i}</div><b class="sm" style="flex:1">${l}</b>${n?badge([n+' pending','b-red']):badge(['All clear','b-ok'])}</div>`).join('')}
+ <div class="sec">Rent booked by city</div><div class="card">${byCity.map(([c,v])=>`<div class="mb"><div class="row sb sm"><span>${c}</span><b>${fmt(v)}</b></div><div style="height:8px;background:#EDF1EF;border-radius:9px;margin-top:4px"><div style="height:100%;width:${v/mx*100}%;background:var(--pri2);border-radius:9px"></div></div></div>`).join('')}</div>`}};
+SCR.akyc=()=>{const P=S.users.filter(u=>u.kyc.status==='pending'),V=S.users.filter(u=>u.kyc.status==='approved').length;
+ return{title:'KYC verification',body:`<p class="sm mut mb">${P.length} pending · ${V} verified users</p>${P.map(u=>{const k=u.kyc,age=Math.floor((Date.now()-new Date(k.dob))/(365.25*DAY));return `<div class="card"><div class="row"><div class="av">${initials(u.name)}</div><div style="flex:1"><b>${esc(u.name)}</b><div class="xs mut">+91 ${esc(u.phone)} · submitted ${fdt(k.submitted)}</div></div></div><div class="kv mt"><span>Licence</span><b>${esc(k.dl)}</b><span>DOB / age</span><b>${esc(k.dob)} (${age} yrs)</b><span>Aadhaar</span><b>XXXX XXXX ${esc(k.aad)}</b></div><div class="grid2 mt"><img class="doc" src="${k.dlImg}"><img class="doc" src="${k.aadImg}"></div><p class="xs mut mt">Live app: auto-check licence via Parivahan/DigiLocker API, Aadhaar via OTP e-KYC.</p><div class="grid2"><button class="btn ghost" style="color:var(--red)" onclick="rejModal('kyc','${u.id}')">Reject</button><button class="btn" onclick="kycOk('${u.id}')">Approve</button></div></div>`}).join('')||'<div class="empty"><div class="ic">✅</div>No KYC pending. All caught up.</div>'}`}};
+function kycOk(id){userById(id).kyc.status='approved';save();toast('KYC approved');render()}
+function rejModal(kind,id){modal(`<h3>Reject ${kind==='kyc'?'KYC':'listing'}</h3><label class="lbl">Reason shown to the user</label><select class="inp" id="rr">${(kind==='kyc'?['Photo is blurry or cropped','Licence expired','Name does not match','Under 21 years']:['Photos missing or unclear','Registration number invalid','Price looks incorrect','Car is too old (pre-2016)']).map(r=>`<option>${r}</option>`).join('')}</select><button class="btn red" onclick="doRej('${kind}','${id}')">Reject</button><button class="btn ghost" onclick="closeModal()">Cancel</button>`)}
+function doRej(kind,id){const r=$('#rr').value;if(kind==='kyc'){const u=userById(id);u.kyc.status='rejected';u.kyc.reason=r}else{const c=carById(id);c.status='rejected';c.reason=r}save();closeModal();toast('Rejected');render()}
+SCR.alist=()=>{const t=T.lt||'pend';const P=S.cars.filter(c=>c.status==='pending'),L=S.cars.filter(c=>c.status==='live');
+ return{title:'Car listings',body:`<div class="seg"><button class="${t==='pend'?'on':''}" onclick="T.lt='pend';render()">Pending (${P.length})</button><button class="${t==='live'?'on':''}" onclick="T.lt='live';render()">Live (${L.length})</button></div>
+ ${(t==='pend'?P:L).map(c=>{const o=userById(c.ownerId);return `<div class="card" style="overflow:hidden"><div class="cimg" style="margin:-14px -14px 10px;aspect-ratio:2.4/1">${carPic(c)}</div><div class="row sb"><b>${esc(carName(c))} ${c.year}</b><b>${fmt(c.price)}/day</b></div><div class="kv mt"><span>Owner</span><b>${esc(o.name)} ${o.kyc.status==='approved'?'✓':'(KYC '+o.kyc.status+')'}</b><span>Reg. no.</span><b>${esc(c.reg)}</b><span>Location</span><b>${esc(c.area)}, ${c.city}</b><span>Specs</span><b>${c.type} · ${c.fuel} · ${c.trans} · ${c.seats} seats</b><span>Deposit</span><b>${fmt(c.deposit)} · ${c.kmLimit>=9999?'Unlimited':c.kmLimit+' km/day'}</b><span>Photos</span><b>${c.photos.length||'None (colour only)'}</b></div>${t==='pend'?`<div class="grid2"><button class="btn ghost" style="color:var(--red)" onclick="rejModal('car','${c.id}')">Reject</button><button class="btn" onclick="carById('${c.id}').status='live';save();toast('Listing is live');render()">Approve</button></div>`:`<button class="btn ghost" onclick="carById('${c.id}').status='rejected';carById('${c.id}').reason='Suspended by admin';save();toast('Listing suspended');render()">Suspend listing</button>`}</div>`}).join('')||'<div class="empty"><div class="ic">✅</div>Nothing pending.</div>'}`}};
+SCR.abook=()=>{const t=T.at||'disp';const D=S.bookings.filter(b=>b.dep==='disputed'),A=[...S.bookings].sort((a,b)=>b.created-a.created);
+ return{title:'Bookings',body:`<div class="seg"><button class="${t==='disp'?'on':''}" onclick="T.at='disp';render()">Disputes (${D.length})</button><button class="${t==='all'?'on':''}" onclick="T.at='all';render()">All (${A.length})</button></div>
+ ${t==='disp'?(D.map(b=>{const c=carById(b.carId);return `<div class="card"><div class="row sb"><b>${esc(carName(c))}</b><span class="xs mut">#${b.id}</span></div><p class="sm mt">Host <b>${esc(userById(b.ownerId).name)}</b> claims <b style="color:var(--red)">${fmt(b.damage)}</b> from <b>${esc(userById(b.renterId).name)}</b>'s ${fmt(b.deposit)} deposit.</p><div class="banner warn mt"><span>“${esc(b.damageNote)}”</span></div>${photosBlock(b).replace('class="card"','')}<div class="grid2"><button class="btn ghost" onclick="resolve('${b.id}',false)">Reject claim</button><button class="btn red" onclick="resolve('${b.id}',true)">Approve deduction</button></div></div>`}).join('')||'<div class="empty"><div class="ic">⚖️</div>No open disputes.</div>')
+ :A.map(b=>`<div class="trow" onclick="go('adbk',{id:'${b.id}'})"><div class="thumb">${carPic(carById(b.carId))}</div><div style="flex:1;min-width:0"><div class="row sb"><b class="sm">${esc(carName(carById(b.carId)))}</b>${badge(stLabel(b))}</div><div class="xs mut">${esc(userById(b.renterId).name)} → ${esc(userById(b.ownerId).name)}</div><div class="row sb xs" style="margin-top:3px"><span class="mut">${fdt(b.from)}</span><b>${fmt(b.total)}</b></div></div></div>`).join('')}`}};
+SCR.adbk=({id})=>{const b=bkById(id),c=carById(b.carId);return{title:'#'+b.id,body:`<div class="card kv"><span>Car</span><b>${esc(carName(c))} · ${esc(c.reg)}</b><span>Renter</span><b>${esc(userById(b.renterId).name)}</b><span>Host</span><b>${esc(userById(b.ownerId).name)}</b><span>Dates</span><b>${fdt(b.from)} → ${fdt(b.to)}</b><span>Status</span><b>${stLabel(b)[0]}</b><span>Paid</span><b>${fmt(b.total)} (${esc(b.pay)})</b><span>Host payout</span><b>${fmt(b.status==='cancelled'?0:payout(b))}</b><span>Platform</span><b>${fmt(platformRev(b))}</b><span>Deposit</span><b>${depLabel(b)[0]}</b></div>${b.dep==='inspection'?`<button class="btn" onclick="releaseDep('${b.id}')">Release deposit now</button>`:''}${photosBlock(b)}`}};
+function resolve(id,ok){const b=bkById(id);if(ok){b.dep='partial';b.refund=Math.max(0,b.deposit-b.damage-b.extraKmCharge);toast('Deduction approved · '+fmt(b.refund)+' refunded to renter')}else{b.dep='refunded';b.refund=b.deposit-b.extraKmCharge;b.damage=0;toast('Claim rejected · full deposit refunded')}save();render()}
+SCR.aset=()=>{const s=S.settings;return{title:'Settings',body:`<div class="card"><h3>Business rules</h3>
+ <label class="lbl">Commission on rent: <b style="color:var(--ink)" id="cv">${s.comm}%</b></label><input type="range" min="5" max="40" value="${s.comm}" style="width:100%;accent-color:var(--pri)" oninput="$('#cv').textContent=this.value+'%'" onchange="S.settings.comm=+this.value;save();toast('Commission set to '+this.value+'% for new bookings')">
+ <div class="grid2"><div><label class="lbl">Convenience fee (₹)</label><input class="inp" inputmode="numeric" value="${s.fee}" onchange="S.settings.fee=Math.max(0,+this.value||0);save();toast('Fee updated')"></div><div><label class="lbl">Extra km rate (₹/km)</label><input class="inp" inputmode="numeric" value="${s.extraKm}" onchange="S.settings.extraKm=Math.max(0,+this.value||0);save();toast('Rate updated')"></div></div>
+ <label class="lbl">GST on rent + fee</label><input class="inp" value="${s.gst}%" disabled></div>
+ <div class="card sm" style="line-height:1.7"><b>Going live — what replaces the demo</b><br>• OTP login → MSG91 / Firebase Auth<br>• Payments & deposit hold → Razorpay (UPI, cards, refunds, Route payouts to hosts)<br>• KYC → DigiLocker / Parivahan licence API + Aadhaar OTP e-KYC<br>• Photos → cloud storage with time & GPS stamp<br>• Data → backend server + database shared by all users</div>
+ <button class="btn ghost" onclick="resetDemo()">Reset demo data</button><button class="btn red" onclick="logout()">Log out</button>`}};
+
+/* ============ boot ============ */
+load();render();
+</script>
+
