@@ -1,11 +1,11 @@
 ---
-title: "BE NATURE"
+title: "BE IN NATURE"
 subtitle: "Character Bible & Channel Identity · Stage 1 · v1.1"
 ---
 
 > **LOCKED CANON (never changes)**
 >
-> 1. BE NATURE IS THE FIRST HUMAN.
+> 1. BE IN NATURE IS THE FIRST HUMAN.
 > 2. HE NEVER LEFT EARTH.
 > 3. HE HAS WATCHED HUMANITY EVOLVE.
 > 4. No religion, gods, afterlife or reincarnation, ever. The universe is original scientific fantasy.
@@ -14,7 +14,7 @@ subtitle: "Character Bible & Channel Identity · Stage 1 · v1.1"
 
 ## Earth is a recorder
 
-In the Be Nature universe, Earth is not just a rock. Across billions of years, its five elements (**Earth, Water, Fire, Air, Space**) slowly developed a property: **they record**. Every event leaves a trace in them. Rivers hold voices, stone holds weight and footsteps, ash holds what burned, wind holds sound, and the sky holds light. Nobody could read this record. It was **memory with no reader**.
+In the Be in Nature universe, Earth is not just a rock. Across billions of years, its five elements (**Earth, Water, Fire, Air, Space**) slowly developed a property: **they record**. Every event leaves a trace in them. Rivers hold voices, stone holds weight and footsteps, ash holds what burned, wind holds sound, and the sky holds light. Nobody could read this record. It was **memory with no reader**.
 
 This is the **Resonance**: the planet's natural memory field. It is a phenomenon, not a god. It has no will, no voice and no plan.
 
@@ -38,9 +38,9 @@ He was the first being on Earth who could *understand that he was looking*. Eart
 
 For his first hundred thousand years he had no name, only the sound he made when he touched the elements. Much later, a lone traveler asked what he was. He had learned that his power came from listening to nature, not ruling it, and he said:
 
-**"Be Nature."**
+**"Be in Nature."**
 
-It is a name, and also an instruction: *be natural, be honest, be of the world and not above it.* Many humans spent lifetimes failing to understand it.
+It is a name, and also an instruction: *be in nature: be natural, be honest, be of the world and not above it.* Many humans spent lifetimes failing to understand it.
 
 # 2. The Core Rules of His Existence
 
@@ -138,7 +138,7 @@ His expertise is **observed behavior across all of history**, never mind-reading
 
 # 7. Visual Identity
 
-## 7.1 Be Nature: The Official Look (LOCKED)
+## 7.1 Be in Nature: The Official Look (LOCKED)
 
 He looks like **a man who has walked the entire history of Earth**, not a deity or a superhero.
 
@@ -161,33 +161,33 @@ He looks like **a man who has walked the entire history of Earth**, not a deity 
 | Fire | Ember amber | Embers floating like slow stars |
 | Air | Pale silver | Visible streams of drifting particles, bending light |
 | Space | Indigo / star-white | Subtle distortion, faint star points inside the air |
-| **The Still (time)** | Desaturated cold blue-grey | Colors drain, motion freezes, only Be Nature moves, and his amber eyes are the only warm point |
+| **The Still (time)** | Desaturated cold blue-grey | Colors drain, motion freezes, only Be in Nature moves, and his amber eyes are the only warm point |
 
 **Rule:** effects are subtle and cinematic, never anime blasts or fireball spectacle.
 
-## 7.3 Channel Brand: BE NATURE
+## 7.3 Channel Brand: BE IN NATURE
 
 - **Logo concept:** a minimalist **eye formed by a ringed circle** (the amber ring), with five tiny element marks (earth, water, fire, air, space) set quietly around it. Clean, simple and readable at small sizes.
-- **Wordmark:** BE NATURE in a strong, clean, slightly weathered serif/sans hybrid. **Tagline: "Earth Remembers."**
+- **Wordmark:** BE IN NATURE in a strong, clean, slightly weathered serif/sans hybrid. **Tagline: "Earth Remembers."**
 - **Palette:** Charcoal `#1B1D20` · Ash Grey `#8A8F94` · Bone White `#EDE8DF` · Ember Amber `#E39A2D` · Deep Teal `#1F5F66`
 - **Telugu typography:** a bold, readable Telugu display font for titles (for example Noto Sans Telugu Black, Ramabhadra or Mandali Bold). Maximum 3–5 words per thumbnail.
 - **Profile picture:** the amber ring-eye logo on charcoal.
-- **Banner:** a wide cinematic landscape at dusk with Be Nature's silhouette on a ridge. Tagline "Earth Remembers." at the lower right.
+- **Banner:** a wide cinematic landscape at dusk with Be in Nature's silhouette on a ridge. Tagline "Earth Remembers." at the lower right.
 
 ## 7.4 Thumbnail System
 
-1. **Left:** Be Nature, three-quarter close-up, amber eyes visible, looking at the camera.
+1. **Left:** Be in Nature, three-quarter close-up, amber eyes visible, looking at the camera.
 2. **Right / background:** the *memory* (burning city, ancient river, ruined hall) in desaturated tones with one color accent.
 3. **Text:** 3–5 Telugu words in bone white with an amber highlight on one key word.
 4. **Always:** dark, cinematic, one clear emotional question.
 
 ## 7.5 Intro (8–10 seconds)
 
-Black. Wind. A single ember. An eye opens and the amber ring glows. Five element sparks circle it. Cut to Be Nature in the Still. Voice: **"Earth remembers. Let me show you."** Logo fade.
+Black. Wind. A single ember. An eye opens and the amber ring glows. Five element sparks circle it. Cut to Be in Nature in the Still. Voice: **"Earth remembers. Let me show you."** Logo fade.
 
 ## 7.6 Outro (10 seconds)
 
-Be Nature walks away through the frozen world. He turns and says the closing line. The Still releases and the world moves again. Logo, "Subscribe" and the next-video card.
+Be in Nature walks away through the frozen world. He turns and says the closing line. The Still releases and the world moves again. Logo, "Subscribe" and the next-video card.
 
 # 8. Dialogue & Narration Guide
 
@@ -226,7 +226,7 @@ Be Nature walks away through the frozen world. He turns and says the closing lin
 ## 9.1 Master character block (paste verbatim into every prompt)
 
 ```
-Be Nature, an ageless man in his early fifties, deep warm brown
+Be in Nature, an ageless man in his early fifties, deep warm brown
 weathered skin, strong brow, deep-set dark brown eyes with a thin
 amber ring around the iris, high cheekbones, calm knowing
 expression, shoulder-length dark hair with grey streaks tied back
@@ -322,9 +322,9 @@ background, bone-white linework, strong simple shapes, brand mark
 
 # 10. AI Video Prompts (Preview)
 
-- **The Still reveal:** "Slow push-in on Be Nature in a busy market where everyone is frozen mid-motion, dust hanging in the air, desaturated, only his amber eyes warm. Subtle camera drift."
+- **The Still reveal:** "Slow push-in on Be in Nature in a busy market where everyone is frozen mid-motion, dust hanging in the air, desaturated, only his amber eyes warm. Subtle camera drift."
 - **Memory dissolve:** "The surface of a river ripples. The camera descends into the water and the ripples resolve into a village from 10,000 years ago, golden-hour tones, handheld, soft grain."
-- **Ridge walk:** "Be Nature walks a ridge at dawn. Mist moves in slow motion. Wind pulls at his tunic."
+- **Ridge walk:** "Be in Nature walks a ridge at dawn. Mist moves in slow motion. Wind pulls at his tunic."
 
 # 11. Voice Design & Narration Guide
 
